@@ -242,7 +242,7 @@ tile_map_data = PackedByteArray("AAAbAP3/AwAAAAAAAAAaAP7/AwAAAAAAAAAaAP3/AwAAAAA
 tile_set = SubResource("TileSet_2udw2")
 
 [node name="Player" parent="." instance=ExtResource("2_plovj")]
-position = Vector2(279, 167)
+position = Vector2(288, 192)
 ground_max_velocity = 120.0
 air_turn_time = 0.4
 air_accel_time = 0.7
@@ -262,6 +262,7 @@ camera = NodePath("../Camera2D")
 [node name="CameraArea2" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_y2ov1")]
 position = Vector2(0, 0)
 camera = NodePath("../Camera2D")
+is_first_room = true
 
 [node name="CameraArea3" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("4_y2ov1")]
 position = Vector2(640, 0)
