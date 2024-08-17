@@ -9,10 +9,12 @@ radius = 9.0
 radius = 2.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 17
 script = ExtResource("1_ct6yo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-skew = 0.523599
+rotation = -0.523599
+skew = -0.523599
 shape = SubResource("CircleShape2D_6oe71")
 
 [node name="Marker2D" type="Marker2D" parent="."]
@@ -24,5 +26,12 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-skew = 0.523599
+rotation = -0.523599
+skew = -0.523599
 shape = SubResource("CircleShape2D_l6mgl")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="erase_block"]
