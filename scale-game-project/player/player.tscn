@@ -1,18 +1,27 @@
 [gd_scene load_steps=4 format=3 uid="uid://bvbw83pfh83ca"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ct6yo"]
-[ext_resource type="Texture2D" uid="uid://ds28k7a4cmwwq" path="res://assets/sprites/default_block1.png" id="2_jo5wn"]
+[ext_resource type="Texture2D" uid="uid://1emngc8345pc" path="res://assets/sprites/farmer_player.png" id="2_201af"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6oe71"]
-radius = 9.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ljut"]
+height = 32.0
 
 [node name="Player" type="CharacterBody2D" groups=["CameraChanger"]]
 collision_mask = 17
 script = ExtResource("1_ct6yo")
+ground_max_velocity = 150.0
+ground_turn_time = 1.407
+ground_fric_time = 0.065
+jump_size = 50.045
+min_jump_size = 20.0
+fall_time = 0.45
+buffering_time = 0.147
+coyote_time = 0.154
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Flip"]
+texture = ExtResource("2_201af")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_6oe71")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_jo5wn")
+shape = SubResource("CapsuleShape2D_1ljut")

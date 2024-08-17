@@ -248,6 +248,6 @@ func manage_animations():
 	pass
 
 func flip_nodes():
-	return
 	if _direction:
-		$Flip.scale.x = _direction
+		$Flip.scale.x = -_direction
+	return
