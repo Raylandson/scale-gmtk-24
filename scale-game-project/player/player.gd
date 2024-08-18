@@ -1,8 +1,9 @@
 extends CharacterBody2D
 
-#class_name Actor
+class_name Actor
 
-enum {STATE_MOVE, STATE_STAND, STATE_AIR, STATE_CLIMBING, STATE_STUNED}
+enum {STATE_MOVE, STATE_STAND, STATE_AIR, STATE_CLIMBING, STATE_STUNED,
+STATE_CARRYING, STATE_CUTTING}
 
 
 const TILE_SIZE = 16
@@ -27,31 +28,29 @@ const TILE_SIZE = 16
 
 @export_range (0.0, 1.0) var buffering_time: float = 0.20
 @export_range (0.0, 1.0) var coyote_time: float = 0.20
-var flip_time = 0.1
-@export_range (0.0, 5.0) var stuned_time: float= 3.0
+var flip_time: float = 0.1
+@export_range (0.0, 5.0) var stuned_time: float = 3.0
 var default_stuned := stuned_time
 
 var active = true 
 
-@onready var _default_gravity = 2 * jump_size / (pow(fall_time, 2)/2) 
-@onready var _gravity_multiplier = jump_size/min_jump_size
-@onready var _ground_fric = ground_max_velocity / (ground_fric_time * _engine_fps) #fps
-@onready var _ground_accel = ground_max_velocity / (ground_accel_time * _engine_fps) #fps
-@onready var _ground_turn_accel = ground_max_velocity / (ground_turn_time * _engine_fps) #fps
-@onready var _air_fric = air_max_velocity / (air_fric_time * _engine_fps) #fps
-@onready var _air_accel = air_max_velocity / (air_accel_time * _engine_fps) #fps
-@onready var _air_turn_accel = air_max_velocity / (air_turn_time * _engine_fps) #fps
+@onready var _default_gravity: float = 2 * jump_size / (pow(fall_time, 2)/2) 
+@onready var _gravity_multiplier: float = jump_size/min_jump_size
+@onready var _ground_fric: float = ground_max_velocity / (ground_fric_time * _engine_fps) #fps
+@onready var _ground_accel: float = ground_max_velocity / (ground_accel_time * _engine_fps) #fps
+@onready var _ground_turn_accel: float = ground_max_velocity / (ground_turn_time * _engine_fps) #fps
+@onready var _air_fric: float = air_max_velocity / (air_fric_time * _engine_fps) #fps
+@onready var _air_accel: float = air_max_velocity / (air_accel_time * _engine_fps) #fps
+@onready var _air_turn_accel: float = air_max_velocity / (air_turn_time * _engine_fps) #fps
 
-@onready var _default_buffering_time = buffering_time
-@onready var _default_coyote_time = coyote_time
-var snap = Vector2.ZERO
+@onready var _default_buffering_time: float = buffering_time
+@onready var _default_coyote_time: float = coyote_time
 var _inside_wind = false
 var _initial_fall_pos := 2.0
 var _fall_distance := 0.0
 var _g_multiplier := 1.0
 var _direction := 0.0
-var _actual_state = STATE_STAND
-#var velocity := Vector2.ZERO
+var _actual_state: int = STATE_STAND
 var _first_fall : bool = false
 var _jump_pressed : bool = false
 var _was_jumped : bool = false
@@ -60,11 +59,25 @@ var _engine_fps = Engine.get_frames_per_second()
 var _previous_state: int = 0
 var _inside_ladder = false
 var _ladder
+var _bucket : Bucket
+var _cut_tree: CutTree
+var carrying_velocity_multiplier: float = 1
+var default_carrying_multiplier: float = 0.5
+var carrying: bool = false
+var inside_well: bool = false
+var inside_bucket: bool = false
+@export var cut_time: float = 1.0
+@onready var default_cut_time: float = cut_time
+var wood_carrying: bool = false
+
+func _process(delta: float) -> void:
+	bucket_follow()
 
 
 func _physics_process(delta):
 	_direction = get_direction()
 	manage_animations()
+	
 	#printt(velocity, _g_multiplier)
 	match _actual_state:
 		STATE_STAND:
@@ -81,23 +94,90 @@ func _physics_process(delta):
 		
 		STATE_CLIMBING:
 			climbing_state(delta)
-
+		
 		
 		STATE_STUNED:
 			stuned_state(delta)
-	
+		
+		
+		STATE_CUTTING:
+			cutting_state(delta)
 	
 	velocity.y += gravity * delta * _g_multiplier
 	move_and_slide()
 
 
-func stand_state(delta):
+func grab(bucket: Bucket) -> void:
+	_bucket = bucket
+	carrying = true
+	if bucket.full():
+		change_velocity_multiplier()
+
+
+func change_velocity_multiplier() -> void:
+	carrying_velocity_multiplier = default_carrying_multiplier
+
+#top 3 nomes
+func disgrab() -> void:
+	carrying = false
+	carrying_velocity_multiplier = 1
+
+
+func bucket_follow() -> void:
+	if is_instance_valid(_bucket) and carrying:
+		_bucket.global_position = %BucketPos.global_position
+	
+	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(_bucket)\
+	and carrying and not inside_well:
+		disgrab()
+		_bucket.dishold()
+
+
+func carrying_state(delta: float) -> void:
+	
+	pass
+
+
+func cut(cut_tree:CutTree) -> void:
+	
+	_cut_tree = cut_tree
+	if not carrying:
+		_actual_state = STATE_CUTTING
+
+
+func cutting_state(delta: float) -> void:
+	if not Input.is_action_pressed("ui_accept"):
+		cutting_state_exit()
+	
+	cut_time -= delta
+	
+	if cut_time < 0:
+		if is_instance_valid(_cut_tree):
+			_cut_tree.finish_cutting()
+		cutting_state_exit()
+	
+	friction(_ground_fric, delta)
+
+
+func cutting_state_exit() -> void:
+	cut_time = default_cut_time
+	if is_on_floor():
+		_actual_state = STATE_STAND
+	else:
+		_actual_state = STATE_AIR
+	pass
+
+
+func friction(frict: float, delta: float):
+	velocity.x = max(abs(velocity.x) - frict * delta, 0.0) * sign(velocity.x)
+
+
+func stand_state(delta: float) -> void:
 	flip_nodes()
 	
-	if not _inside_wind:
-		velocity.x = max(abs(velocity.x) - _ground_fric, 0.0) * sign(velocity.x)
+	friction(_ground_fric, delta)
 	
-	velocity.x = clamp(velocity.x, -ground_max_velocity, ground_max_velocity)
+	#velocity.x = clamp(velocity.x, -ground_max_velocity, ground_max_velocity)
 	
 	if _direction != 0:
 		_actual_state = STATE_MOVE
@@ -109,9 +189,9 @@ func stand_state(delta):
 		_actual_state = STATE_AIR
 
 
-func move_state(delta):
+func move_state(delta: float) -> void:
 	flip_nodes()
-	movement(_ground_accel, _ground_turn_accel, ground_max_velocity)
+	movement(_ground_accel, _ground_turn_accel, ground_max_velocity, delta)
 		
 	if _direction == 0.0:
 		flip_time -= delta
@@ -128,13 +208,13 @@ func move_state(delta):
 		_actual_state = STATE_AIR
 
 
-func air_state(delta):
+func air_state(delta: float) -> void:
 	flip_nodes()
-	movement(_air_accel, _air_turn_accel, air_max_velocity)
+	movement(_air_accel, _air_turn_accel, air_max_velocity, delta)
 	calculate_fall_distance()
 	
 	if _direction == 0.0:
-		velocity.x = max(abs(velocity.x) - _air_fric, 0.0) * sign(velocity.x)
+		friction(_air_fric, delta)
 	
 	if Input.is_action_just_pressed("jump"):
 		_jump_pressed = true
@@ -174,7 +254,7 @@ func stun(_bool: bool = true) -> void:
 	_actual_state = _previous_state
 
 
-func stuned_state(delta) -> void:
+func stuned_state(delta: float) -> void:
 	
 	return
 	
@@ -217,7 +297,7 @@ func calculate_fall_distance() -> void:
 		_fall_distance = 0.0
 
 
-func climbing_state(_delta):
+func climbing_state(_delta) -> void:
 	pass
 
 
@@ -227,27 +307,32 @@ func get_direction() -> float:
 	return 0.0
 
 
-func jump():
+func jump() -> void:
 #	inside if active
 	velocity.y = -jump_force
 	_was_jumped = true
 
 
-func movement(accel:float, turn_accel:float, max_velocity:float) -> void:
+func movement(accel:float, turn_accel:float, max_velocity:float, delta:float) -> void:
+	#if Input.is_action_just_pressed("ui_accept") and carrying:
+		#disgrab()
+	
 	if _direction != 0.0:
 		if _direction == sign(velocity.x) or is_equal_approx(velocity.x, 0):
-			velocity.x += accel * _direction
+			#print(accel)
+			velocity.x += accel * _direction * delta
 		
 		else:
-			velocity.x += turn_accel * _direction
+			velocity.x += turn_accel * _direction * delta
 		
-		velocity.x = clamp(velocity.x, -max_velocity, max_velocity)
+		velocity.x = clamp(velocity.x,
+		 -max_velocity * carrying_velocity_multiplier,
+		 max_velocity * carrying_velocity_multiplier)
 
 
 func manage_animations():
 	pass
 
-func flip_nodes():
+func flip_nodes() -> void:
 	if _direction:
 		$Flip.scale.x = -_direction
-	return

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cpbjwgxr7f1t3"]
+
+[ext_resource type="Script" path="res://tools/well.gd" id="1_s6ewa"]
+[ext_resource type="Texture2D" uid="uid://bn7jyvcvb1lr6" path="res://icon.svg" id="2_ns7p0"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76vlh"]
+radius = 45.0
+height = 150.0
+
+[node name="Well" type="Area2D"]
+script = ExtResource("1_s6ewa")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.71875, 1)
+texture = ExtResource("2_ns7p0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_76vlh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
