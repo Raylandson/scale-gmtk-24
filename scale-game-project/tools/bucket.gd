@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Bucket
 var player: Actor
 var player_inside: bool = false
-@export var gravity: float = 122.0
+@export var gravity: float = 222.0
 @onready var default_gravity: float = gravity
 @export var max_water_quantity: int = 2
 

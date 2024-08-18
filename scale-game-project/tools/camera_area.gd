@@ -6,16 +6,21 @@ extends Area2D
 @export var is_first_room: bool = false
 
 func _ready() -> void:
+	#depois programar para achar a camera automatic vinici 13
+	
 	if is_first_room:
 		camera.global_position = $Marker2D.global_position
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if is_first_room:
+	if is_first_room and body.is_in_group("CameraChanger"):
 		is_first_room = false
+		print(self.name)
 		return
 	
 	if body.is_in_group("CameraChanger"):
+		
+		prints(self.name, is_first_room)
 		actor_animation(body)
 		camera_animation()
 

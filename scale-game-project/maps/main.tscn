@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://b1o4b47kfvsbr"]
+[gd_scene load_steps=25 format=4 uid="uid://b1o4b47kfvsbr"]
 
 [ext_resource type="Texture2D" uid="uid://bn7jyvcvb1lr6" path="res://icon.svg" id="1_3crm5"]
 [ext_resource type="PackedScene" uid="uid://bvbw83pfh83ca" path="res://player/player.tscn" id="2_plovj"]
@@ -12,7 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://bi8hos746qhnk" path="res://seed/seed.tscn" id="10_i48q2"]
 [ext_resource type="PackedScene" uid="uid://bqdoisca0dx26" path="res://enemy/worm_enemy.tscn" id="11_fvv4m"]
 [ext_resource type="Texture2D" uid="uid://dtseb4fig3e6u" path="res://assets/sprites/crow1.png" id="12_86txa"]
+[ext_resource type="PackedScene" uid="uid://84fc07qg4qwn" path="res://tools/bucket.tscn" id="14_5lnfd"]
 [ext_resource type="Texture2D" uid="uid://c5hm2j8s4wnhj" path="res://assets/sprites/crow3.png" id="14_8gc8x"]
+[ext_resource type="PackedScene" uid="uid://bkda8mouc26ie" path="res://tools/tree.tscn" id="15_cphb1"]
+[ext_resource type="PackedScene" uid="uid://bvgrp8c2m7ffg" path="res://tools/ore.tscn" id="16_msvac"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hp6w0"]
 texture = ExtResource("1_3crm5")
@@ -228,13 +231,31 @@ grow_vertical = 2
 metadata/_edit_lock_ = true
 
 [node name="WormEnemy" parent="." instance=ExtResource("11_fvv4m")]
-position = Vector2(34, 209)
+position = Vector2(79, 396)
 
 [node name="WormEnemy2" parent="." instance=ExtResource("11_fvv4m")]
-position = Vector2(532, 212)
+position = Vector2(547, 387)
 
 [node name="Crow" type="AnimatedSprite2D" parent="."]
 position = Vector2(407, 101)
 sprite_frames = SubResource("SpriteFrames_3o57i")
 autoplay = "default"
 frame_progress = 0.531527
+
+[node name="Bucket" parent="." instance=ExtResource("14_5lnfd")]
+position = Vector2(250, 194)
+
+[node name="Tree" parent="." instance=ExtResource("15_cphb1")]
+position = Vector2(184, 186)
+
+[node name="Ore" parent="." instance=ExtResource("16_msvac")]
+position = Vector2(154, 191)
+
+[node name="Ore2" parent="." instance=ExtResource("16_msvac")]
+position = Vector2(137, 188)
+
+[node name="Ore3" parent="." instance=ExtResource("16_msvac")]
+position = Vector2(153, 177)
+
+[node name="Ore4" parent="." instance=ExtResource("16_msvac")]
+position = Vector2(143, 203)

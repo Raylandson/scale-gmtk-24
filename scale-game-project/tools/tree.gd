@@ -13,7 +13,8 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and player_inside\
-	and is_instance_valid(player) and not player.carrying and not player.inside_bucket:
+	and is_instance_valid(player) and not player.carrying \
+	and not player.inside_bucket and not player.wood_carrying:
 		player.cut(self)
 	
 	velocity.y += 222 * delta
@@ -33,7 +34,7 @@ func spawn_logs() -> void:
 		new_log.global_position = self.global_position
 		get_tree().current_scene.add_child(new_log)
 		print('log spawned')
-		await get_tree().create_timer(0.01).timeout
+		#await get_tree().create_timer(0.01).timeout
 	
 	self.queue_free()
 

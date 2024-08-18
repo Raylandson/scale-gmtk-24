@@ -36,12 +36,12 @@ var active = true
 
 @onready var _default_gravity: float = 2 * jump_size / (pow(fall_time, 2)/2) 
 @onready var _gravity_multiplier: float = jump_size/min_jump_size
-@onready var _ground_fric: float = ground_max_velocity / (ground_fric_time * _engine_fps) #fps
-@onready var _ground_accel: float = ground_max_velocity / (ground_accel_time * _engine_fps) #fps
-@onready var _ground_turn_accel: float = ground_max_velocity / (ground_turn_time * _engine_fps) #fps
-@onready var _air_fric: float = air_max_velocity / (air_fric_time * _engine_fps) #fps
-@onready var _air_accel: float = air_max_velocity / (air_accel_time * _engine_fps) #fps
-@onready var _air_turn_accel: float = air_max_velocity / (air_turn_time * _engine_fps) #fps
+@onready var _ground_fric: float = ground_max_velocity / (ground_fric_time) #fps
+@onready var _ground_accel: float = ground_max_velocity / (ground_accel_time) #fps
+@onready var _ground_turn_accel: float = ground_max_velocity / (ground_turn_time) #fps
+@onready var _air_fric: float = air_max_velocity / (air_fric_time) #fps
+@onready var _air_accel: float = air_max_velocity / (air_accel_time) #fps
+@onready var _air_turn_accel: float = air_max_velocity / (air_turn_time) #fps
 
 @onready var _default_buffering_time: float = buffering_time
 @onready var _default_coyote_time: float = coyote_time
@@ -72,6 +72,8 @@ var wood_carrying: bool = false
 
 func _process(delta: float) -> void:
 	bucket_follow()
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
 
 
 func _ready():
@@ -82,7 +84,9 @@ func _physics_process(delta):
 	_direction = get_direction()
 	manage_animations()
 	
-	#printt(velocity, _g_multiplier)
+	
+	#printt(velocity, _g_multiplier, _ground_accel)
+	#print(_actual_state)
 	match _actual_state:
 		STATE_STAND:
 			stand_state(delta)
@@ -320,6 +324,7 @@ func jump() -> void:
 func movement(accel:float, turn_accel:float, max_velocity:float, delta:float) -> void:
 	#if Input.is_action_just_pressed("ui_accept") and carrying:
 		#disgrab()
+	#print('movemenenenenene')
 	
 	if _direction != 0.0:
 		if _direction == sign(velocity.x) or is_equal_approx(velocity.x, 0):

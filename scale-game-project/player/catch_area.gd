@@ -27,47 +27,63 @@ func _process(delta: float) -> void:
 	
 	
 	if timer < 0:
-		printt(player.carrying, player.wood_carrying, current_itens.size(), items_list.is_empty())
+		printt(player.carrying, player.wood_carrying, current_itens.size(), 
+		items_list.is_empty(), current_itens, items_list)
 		timer = 0.5
 	
 	can_catch_timer -= delta
 	
 	if Input.is_action_just_pressed("ui_accept") and player.wood_carrying \
-		and items_list.is_empty() and not current_itens.is_empty():
+		and (items_list.is_empty() or current_itens.size() >= max_carrying_items) \
+		and not current_itens.is_empty():
 
-		var items_copy: Array = current_itens.duplicate()  # Faz uma cópia da lista
-
+		var items_copy: Array = current_itens.duplicate()
+		
 		for item:Node2D in items_copy:
-			items_list.append(item)
-			if item.has_method("set_freeze"):
+			if items_list.size() < max_carrying_items:
+				items_list.append(item)
+			
+			if item is CollectableItem:
 				item.set_freeze(false)
-			current_itens.erase(item)  # Remove da lista original
+				var base_vector: Vector2 = item.random_direction_upwards()
+				
+				item.apply_central_force(player.velocity * 30 + \
+				base_vector * randf_range(1, 5)) # esse numero magico eh psico
+			current_itens.erase(item)
 			print('item deletado', item.name)
-
+		
 		if current_itens.is_empty():
 			player.wood_carrying = false
 		#tem que ter esse return
 		return
-
+		
 	if Input.is_action_just_pressed("ui_accept") and not player.carrying \
-		and (not player.wood_carrying or not current_itens.size() >= max_carrying_items) \
+		and (not player.wood_carrying or current_itens.size() < max_carrying_items) \
 		and not items_list.is_empty():
 		print('catching wood')
-
-		var items_copy: Array = items_list.duplicate()  # Faz uma cópia da lista
-
+		
+		var items_copy: Array = items_list.duplicate() 
+		
 		for item: Node2D in items_copy:
-			if item.has_method("set_freeze"):
+			if current_itens.size() >= max_carrying_items:
+				break 
+			if current_itens.has(item):
+				continue
+			if item is CollectableItem:
 				item.set_freeze(true)
 			current_itens.append(item)
-			items_list.erase(item)  # Remove da lista original
+			items_list.erase(item)
 
 		player.wood_carrying = true
 
 
+
 func _on_body_entered(body: Node2D) -> void:
-	if body.is_in_group("CatchItem") and not current_itens.has(body):
-		items_list.append(body)
+	if body.is_in_group("CatchItem") and not current_itens.has(body) \
+	and not items_list.has(body) and items_list.size() < max_carrying_items:
+		#gptenio maluco logo 2 if pra confima com a mesma bool
+		if items_list.size() < max_carrying_items:
+			items_list.append(body)
 
 
 func _on_body_exited(body: Node2D) -> void:

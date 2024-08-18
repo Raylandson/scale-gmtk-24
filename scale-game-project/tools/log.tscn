@@ -20,6 +20,7 @@ mass = 0.805
 physics_material_override = SubResource("PhysicsMaterial_ivv3t")
 center_of_mass_mode = 1
 script = ExtResource("1_ykr6o")
+spawn_velocity_force = 10000.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_6l1ut")
@@ -29,6 +30,8 @@ scale = Vector2(0.046875, 0.21875)
 texture = ExtResource("1_d1ird")
 
 [node name="LogCollectArea" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LogCollectArea"]
 shape = SubResource("CircleShape2D_na70n")
