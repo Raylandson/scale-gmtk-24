@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://84fc07qg4qwn"]
+
+[ext_resource type="Texture2D" uid="uid://bn7jyvcvb1lr6" path="res://icon.svg" id="1_w5pqt"]
+[ext_resource type="Script" path="res://tools/bucket.gd" id="1_wfayw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xkp7u"]
+radius = 25.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b4pog"]
+radius = 8.0
+
+[node name="Bucket" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 16
+script = ExtResource("1_wfayw")
+
+[node name="GrabArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GrabArea"]
+shape = SubResource("CircleShape2D_xkp7u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b4pog")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.09375, 0.109375)
+texture = ExtResource("1_w5pqt")
+
+[connection signal="body_entered" from="GrabArea" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="GrabArea" to="." method="_on_body_exited"]
