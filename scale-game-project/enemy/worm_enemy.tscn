@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://bqdoisca0dx26"]
+
+[ext_resource type="Script" path="res://enemy/worm_enemy.gd" id="1_83hfe"]
+[ext_resource type="Texture2D" uid="uid://cc1kia8x275i1" path="res://assets/sprites/worm.png" id="2_6hx4w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbpjr"]
+size = Vector2(23.25, 36.875)
+
+[sub_resource type="Animation" id="Animation_rrdeh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Seed:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_6ni8x"]
+resource_name = "movingR"
+length = 0.5405
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Seed:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_21xnn"]
+resource_name = "movingL"
+length = 0.5405
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Seed:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [3, 5, 4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qxmd6"]
+_data = {
+"RESET": SubResource("Animation_rrdeh"),
+"movingL": SubResource("Animation_21xnn"),
+"movingR": SubResource("Animation_6ni8x")
+}
+
+[node name="WormEnemy" type="CharacterBody2D"]
+collision_mask = 17
+script = ExtResource("1_83hfe")
+
+[node name="Seed" type="Sprite2D" parent="."]
+position = Vector2(0, -11)
+texture = ExtResource("2_6hx4w")
+hframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.437499, -11)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_pbpjr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qxmd6")
+}
+autoplay = "movingR"

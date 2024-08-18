@@ -62,6 +62,10 @@ var _inside_ladder = false
 var _ladder
 
 
+func _ready():
+	add_to_group("player")
+
+
 func _physics_process(delta):
 	_direction = get_direction()
 	manage_animations()
