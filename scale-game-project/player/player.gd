@@ -74,6 +74,10 @@ func _process(delta: float) -> void:
 	bucket_follow()
 
 
+func _ready():
+	add_to_group("player")
+
+
 func _physics_process(delta):
 	_direction = get_direction()
 	manage_animations()

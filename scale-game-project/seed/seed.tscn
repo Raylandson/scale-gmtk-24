@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi8hos746qhnk"]
+
+[ext_resource type="Texture2D" uid="uid://b7505ocypkei0" path="res://assets/sprites/seed.png" id="1_8rdpw"]
+[ext_resource type="Script" path="res://seed/seed.gd" id="1_sieue"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_taeee"]
+size = Vector2(28, 30)
+
+[node name="Seed" type="StaticBody2D"]
+collision_mask = 17
+script = ExtResource("1_sieue")
+
+[node name="Seed" type="Sprite2D" parent="."]
+texture = ExtResource("1_8rdpw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_taeee")
