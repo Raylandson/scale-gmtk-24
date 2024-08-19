@@ -41,6 +41,11 @@ enemy=""
 player=""
 MainTileMap=""
 
+[gui]
+
+theme/custom="res://assets/resources/font_theme.tres"
+theme/custom_font="res://assets/resources/Pixellari.ttf"
+
 [input]
 
 ui_accept={

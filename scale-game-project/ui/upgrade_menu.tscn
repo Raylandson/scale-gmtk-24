@@ -1,0 +1,140 @@
+[gd_scene load_steps=11 format=3 uid="uid://cewtcn5mp3p3b"]
+
+[ext_resource type="Script" path="res://ui/upgrade_menu.gd" id="1_xca64"]
+[ext_resource type="Texture2D" uid="uid://dgn32eh1ko8qw" path="res://assets/sprites/left_arrow.png" id="2_mtgm0"]
+[ext_resource type="Texture2D" uid="uid://dh2ir8d6y5t8w" path="res://assets/sprites/water_icon.png" id="3_0fe4j"]
+[ext_resource type="Texture2D" uid="uid://bd17segsrbx12" path="res://assets/sprites/panel.png" id="3_hls1n"]
+[ext_resource type="Texture2D" uid="uid://07wr6wlafnyk" path="res://assets/sprites/right_arrow.png" id="4_51xbp"]
+[ext_resource type="Theme" uid="uid://bbot8f347duf0" path="res://assets/resources/font_theme.tres" id="5_psyno"]
+[ext_resource type="Texture2D" uid="uid://j217o4fahfko" path="res://assets/sprites/wood_icon.png" id="6_qmeho"]
+[ext_resource type="Texture2D" uid="uid://vquoxdnpnw7j" path="res://assets/sprites/ore_icon.png" id="7_g65px"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ligfl"]
+texture = ExtResource("3_hls1n")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 15.0
+texture_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_o2cgh"]
+texture = ExtResource("3_hls1n")
+texture_margin_left = 4.0
+texture_margin_top = 4.0
+texture_margin_right = 15.0
+texture_margin_bottom = 4.0
+
+[node name="UpgradeMenu" type="CanvasLayer"]
+script = ExtResource("1_xca64")
+
+[node name="Upgrade" type="MarginContainer" parent="."]
+offset_left = 173.0
+offset_top = 25.0
+offset_right = 394.0
+offset_bottom = 106.0
+theme_override_constants/margin_left = -1
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="Upgrade"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ligfl")
+
+[node name="MarginContainer" type="MarginContainer" parent="Upgrade"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureButton2" type="TextureButton" parent="Upgrade/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("2_mtgm0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Upgrade/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("5_psyno")
+text = "
+  + Player Mining 
+        Speed "
+scroll_active = false
+
+[node name="TextureButton" type="TextureButton" parent="Upgrade/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+texture_normal = ExtResource("4_51xbp")
+
+[node name="ResourceCount" type="MarginContainer" parent="."]
+offset_left = 160.0
+offset_top = 94.0
+offset_right = 283.0
+offset_bottom = 116.0
+
+[node name="Panel" type="Panel" parent="ResourceCount"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_o2cgh")
+
+[node name="MarginContainer" type="MarginContainer" parent="ResourceCount/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="ResourceCount/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ResourceCount/Panel/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_0fe4j")
+
+[node name="Label" type="Label" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_psyno")
+text = "1"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_qmeho")
+
+[node name="Label" type="Label" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("5_psyno")
+text = "1"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("7_g65px")
+
+[node name="Label" type="Label" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("5_psyno")
+text = "1"

@@ -135,6 +135,7 @@ _data = {
 [node name="Player" type="CharacterBody2D" groups=["CameraChanger"]]
 collision_mask = 17
 script = ExtResource("1_ct6yo")
+horizontal_attack_damage = 15
 jump_size = 50.045
 min_jump_size = 20.0
 fall_time = 0.45

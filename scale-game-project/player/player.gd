@@ -213,7 +213,8 @@ func stand_state(delta: float) -> void:
 
 func move_state(delta: float) -> void:
 	flip_nodes()
-	movement(_ground_accel, _ground_turn_accel, ground_max_velocity, delta)
+	#SPEED MULTIPLIER BRONCA BRONCA ALARME
+	movement(_ground_accel, _ground_turn_accel, ground_max_velocity * Globals.speed_multi, delta)
 		
 	if _direction == 0.0:
 		flip_time -= delta
@@ -374,12 +375,12 @@ func flip_nodes() -> void:
 
 func _on_horizontal_attack_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		body.take_damage(horizontal_attack_damage)
+		body.take_damage(horizontal_attack_damage * Globals.damage_multi)
 
 
-func _on_vertical_attack_body_entered(body: Area2D) -> void:
-	if body.is_in_group("enemy"):
-		body.take_damage(vertical_attack_damage)
+#func _on_vertical_attack_body_entered(body: Area2D) -> void:
+	#if body.is_in_group("enemy"):
+		#body.take_damage(vertical_attack_damage)
 
 
 func horizontal_attack():

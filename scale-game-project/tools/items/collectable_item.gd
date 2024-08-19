@@ -26,6 +26,6 @@ func set_freeze(_bool: bool) -> void:
 	#self.call_deferred("freeze", _bool)
 	self.freeze = _bool
 	if is_instance_valid(collision):
-		collision.disabled = _bool
+		collision.call_deferred("set", "disabled", _bool)
 		return
 	print('nao colocou a colisio')

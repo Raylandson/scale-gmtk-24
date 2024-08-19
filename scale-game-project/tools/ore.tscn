@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://bvgrp8c2m7ffg"]
 
 [ext_resource type="Script" path="res://tools/ore.gd" id="1_226qe"]
-[ext_resource type="Texture2D" uid="uid://ds28k7a4cmwwq" path="res://assets/sprites/default_block1.png" id="1_tnrgo"]
+[ext_resource type="Texture2D" uid="uid://vquoxdnpnw7j" path="res://assets/sprites/ore_icon.png" id="2_1u5pq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1v1i8"]
 bounce = 0.4
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3q1um"]
-radius = 5.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17e3n"]
+size = Vector2(14, 12)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_te6wg"]
 radius = 6.0
@@ -23,15 +23,16 @@ spawn_velocity_force = 10000.0
 collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_3q1um")
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_17e3n")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.3125)
-texture = ExtResource("1_tnrgo")
+texture = ExtResource("2_1u5pq")
 
 [node name="Area2D" type="Area2D" parent="."]
 monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_te6wg")
