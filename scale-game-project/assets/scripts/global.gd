@@ -20,7 +20,8 @@ func _ready():
 	pass # Replace with function body.
 
 func _process(delta: float) -> void:
-	print(wood, water, ore)
+	#print(wood, water, ore)
+	pass
 
 func _change_wood(new_value):
 	wood = max(0, new_value)

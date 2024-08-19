@@ -63,7 +63,7 @@ _data = {
 }
 
 [node name="WormEnemy" type="CharacterBody2D" groups=["enemy"]]
-collision_mask = 17
+collision_mask = 16
 script = ExtResource("1_83hfe")
 
 [node name="Seed" type="Sprite2D" parent="."]

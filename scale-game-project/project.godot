@@ -39,6 +39,7 @@ CameraChanger="Group that change the camera position"
 CatchItem=""
 enemy=""
 player=""
+MainTileMap=""
 
 [input]
 

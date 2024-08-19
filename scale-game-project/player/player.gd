@@ -8,6 +8,8 @@ STATE_CARRYING, STATE_CUTTING}
 
 const TILE_SIZE = 16
 
+@export var tile_map: TileMapLayer
+
 @export var horizontal_attack_damage = 10
 @export var vertical_attack_damage = 15
 
@@ -59,6 +61,7 @@ var _jump_pressed : bool = false
 var _was_jumped : bool = false
 var _engine_fps = Engine.get_frames_per_second()
 
+var inside_upgrade_area: bool = false
 var _previous_state: int = 0
 var _inside_ladder = false
 var _ladder
@@ -179,7 +182,6 @@ func cutting_state_exit() -> void:
 		_actual_state = STATE_STAND
 	else:
 		_actual_state = STATE_AIR
-	pass
 
 
 func friction(frict: float, delta: float):

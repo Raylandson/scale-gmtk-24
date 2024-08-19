@@ -8,7 +8,11 @@ func _ready():
 
 
 func _on_collect_area_body_entered(body: Node2D) -> void:
+	if body is Actor:
+		body.inside_upgrade_area = true
+	
 	if body is CollectableItem:
+		body.collectable = false
 		if Globals.dict_vars.has(body.type):
 			Globals.dict_vars[body.type] += 1
 			Globals.update_vars()
@@ -19,4 +23,10 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 		var tw = create_tween()
 		tw.tween_property(body, "global_position", self.global_position, anim_time)
 		await get_tree().create_timer(anim_time).timeout
-		body.queue_free()
+		if is_instance_valid(body):
+			body.queue_free()
+
+
+func _on_collect_area_body_exited(body: Node2D) -> void:
+	if body is Actor:
+		body.inside_upgrade_area = false

@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvbw83pfh83ca"]
+[gd_scene load_steps=14 format=3 uid="uid://bvbw83pfh83ca"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ct6yo"]
 [ext_resource type="Texture2D" uid="uid://1emngc8345pc" path="res://assets/sprites/farmer_player.png" id="2_201af"]
+[ext_resource type="Script" path="res://player/mining_tool.gd" id="3_6yb8d"]
 [ext_resource type="Script" path="res://player/catch_area.gd" id="3_xw35a"]
+[ext_resource type="PackedScene" uid="uid://bvgrp8c2m7ffg" path="res://tools/ore.tscn" id="4_b6e1s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hj05l"]
 size = Vector2(35, 38)
@@ -143,6 +145,12 @@ coyote_time = 0.154
 
 [node name="Sprite2D" type="Sprite2D" parent="Flip"]
 texture = ExtResource("2_201af")
+
+[node name="MiningPos" type="Marker2D" parent="Flip" node_paths=PackedStringArray("player")]
+position = Vector2(-9, 23)
+script = ExtResource("3_6yb8d")
+player = NodePath("../..")
+ore = ExtResource("4_b6e1s")
 
 [node name="BucketPos" type="Marker2D" parent="Flip"]
 unique_name_in_owner = true

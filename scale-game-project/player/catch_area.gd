@@ -16,22 +16,28 @@ func _process(delta: float) -> void:
 	
 	var count = 0
 	
-	for item:Node2D in current_itens:
+	var duplicated_current_item = current_itens.duplicate()
+	
+	for item in duplicated_current_item:
 		if is_instance_valid(item):
 			item.global_position = catch_position.global_position\
 			+ Vector2(0, -count * offset_pos)
+			count+= 1
 		else:
 			current_itens.erase(item)
-		count+= 1
 	
 	
 	
 	if timer < 0:
-		#printt(player.carrying, player.wood_carrying, current_itens.size(), 
-		#items_list.is_empty(), current_itens, items_list)
+		printt(player.carrying, player.wood_carrying, current_itens.size(), 
+		items_list.is_empty(), current_itens, items_list)
 		timer = 0.5
 	
 	can_catch_timer -= delta
+	
+	#sem tempo pra clean code
+	if current_itens.is_empty():
+		player.wood_carrying = false
 	
 	if Input.is_action_just_pressed("ui_accept") and player.wood_carrying \
 		and (items_list.is_empty() or current_itens.size() >= max_carrying_items) \
@@ -39,7 +45,10 @@ func _process(delta: float) -> void:
 
 		var items_copy: Array = current_itens.duplicate()
 		
-		for item:Node2D in items_copy:
+		for item in items_copy:
+			if not is_instance_valid(item):
+				current_itens.erase(item)
+				continue
 			if items_list.size() < max_carrying_items:
 				items_list.append(item)
 			
@@ -47,24 +56,25 @@ func _process(delta: float) -> void:
 				item.set_freeze(false)
 				var base_vector: Vector2 = item.random_direction_upwards()
 				
-				item.apply_central_force(player.velocity * 100 + \
+				item.apply_central_force(player.velocity * Vector2(100, 70) + \
 				base_vector * randf_range(1, 5)) # esse numero magico eh psico
 			current_itens.erase(item)
 			print('item deletado', item.name)
 		
-		if current_itens.is_empty():
-			player.wood_carrying = false
 		#tem que ter esse return
 		return
 		
 	if Input.is_action_just_pressed("ui_accept") and not player.carrying \
 		and (not player.wood_carrying or current_itens.size() < max_carrying_items) \
-		and not items_list.is_empty():
+		and not items_list.is_empty() and not player.inside_upgrade_area:
 		print('catching wood')
 		
 		var items_copy: Array = items_list.duplicate() 
 		
-		for item: Node2D in items_copy:
+		for item in items_copy:
+			if not is_instance_valid(item):
+				items_list.erase(item)
+				continue
 			if current_itens.size() >= max_carrying_items:
 				break 
 			if current_itens.has(item):
@@ -82,6 +92,9 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("CatchItem") and not current_itens.has(body) \
 	and not items_list.has(body) and items_list.size() < max_carrying_items:
 		#gptenio maluco logo 2 if pra confima com a mesma bool
+		if body is CollectableItem:
+			if not body.collectable:
+				return
 		if items_list.size() < max_carrying_items:
 			items_list.append(body)
 
