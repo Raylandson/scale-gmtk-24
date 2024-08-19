@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://lqqw6umf8nkf"]
+
+[ext_resource type="Script" path="res://tools/enemy_generator.gd" id="1_drxx5"]
+[ext_resource type="PackedScene" uid="uid://bqdoisca0dx26" path="res://enemy/worm_enemy.tscn" id="2_u0nwk"]
+
+[node name="EnemyGenerator" type="Node2D" node_paths=PackedStringArray("spawn_timer")]
+script = ExtResource("1_drxx5")
+spawn_timer = NodePath("SpawnTimer")
+worm_enemy = ExtResource("2_u0nwk")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

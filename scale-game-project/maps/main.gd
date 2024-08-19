@@ -25,7 +25,7 @@ func _ready() -> void:
 			var resource_choice := randf()
 			
 			if resource_choice < chance_to_spawn_ore:
-				tile_map.set_cell(cell, 4, Vector2i.ZERO) 
+				tile_map.set_cell(cell, 0, Vector2i.ZERO) 
 			elif resource_choice < chance_to_spawn_ore + chance_to_spawn_tree:
 				spawn_scene(tree_scene, current_pos) 
 			else:

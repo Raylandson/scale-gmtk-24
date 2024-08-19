@@ -39,6 +39,7 @@ func _physics_process(delta):
 	
 	match current_state:
 		States.CRAWLING:
+			print('crawling in my skin')
 			gravity_scale = 0
 			if is_instance_valid(target):
 				direction = global_position.direction_to(floor_pos)
@@ -49,7 +50,9 @@ func _physics_process(delta):
 			if is_instance_valid(tile_map):
 				var cell_id: = tile_map.get_cell_source_id(
 					tile_map.local_to_map(self.global_position))
+				
 				if cell_id == -1:
+					
 					gravity_scale = 1
 					current_state = States.MOVING
 					$CollisionShape2D.disabled = false

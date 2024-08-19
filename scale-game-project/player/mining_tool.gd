@@ -14,7 +14,7 @@ func _process(delta: float) -> void:
 
 
 func mine_cell(cell_id: int, cell_position:Vector2i) -> void:
-	if cell_id != 3:
+	if cell_id != 0:
 		return
 	
 	tile_map.set_cell(cell_position)
