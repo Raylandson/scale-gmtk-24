@@ -11,6 +11,13 @@ var dict_vars: Dictionary = {
 	"ore" : ore
 }
 
+var speed_multi = 1
+var mining_speed_multi = 1
+var chop_speed_multi = 1
+var damage_multi = 1
+var carry_count = 3
+
+
 func update_vars():
 	wood = dict_vars["wood"]
 	water = dict_vars["water"]
@@ -18,10 +25,3 @@ func update_vars():
 
 func _ready():
 	pass # Replace with function body.
-
-func _process(delta: float) -> void:
-	print(wood, water, ore)
-
-func _change_wood(new_value):
-	wood = max(0, new_value)
-	print(wood)

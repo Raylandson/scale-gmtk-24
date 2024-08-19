@@ -1,33 +1,236 @@
-[gd_scene load_steps=6 format=3 uid="uid://bkda8mouc26ie"]
+[gd_scene load_steps=12 format=3 uid="uid://bkda8mouc26ie"]
 
 [ext_resource type="Script" path="res://tools/tree.gd" id="1_haqbx"]
-[ext_resource type="Texture2D" uid="uid://bn7jyvcvb1lr6" path="res://icon.svg" id="2_0tb3c"]
 [ext_resource type="PackedScene" uid="uid://bvgrp8c2m7ffg" path="res://tools/ore.tscn" id="2_yxct5"]
+[ext_resource type="Texture2D" uid="uid://7uv80efdwdfw" path="res://assets/sprites/tree0.png" id="3_wgpx7"]
+[ext_resource type="Texture2D" uid="uid://d10wsp6xq0t6e" path="res://assets/sprites/tree1.png" id="4_l8k3u"]
+[ext_resource type="PackedScene" uid="uid://c0vhe50r5br4k" path="res://ui/interact_button_ui.tscn" id="4_la5lb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0x2j"]
-size = Vector2(20, 72)
+size = Vector2(15, 78)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x0rn1"]
-radius = 23.0
+radius = 24.0208
+
+[sub_resource type="Animation" id="Animation_7hhcs"]
+resource_name = "chooping"
+length = 0.6455
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.174533, -0.15708, 0.174533, -0.167552]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.902, 0.885), Vector2(1.012, 1), Vector2(0.94, 0.935)]
+}
+
+[sub_resource type="Animation" id="Animation_sh0fj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractButtonUi/CollisionShape2D3:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xa5fn"]
+resource_name = "fall"
+length = 0.895
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667, 0.7, 0.733333),
+"transitions": PackedFloat32Array(1, 1, 0.63728, 1),
+"update": 0,
+"values": [Vector2(1.055, 1.045), Vector2(1.055, 1.045), Vector2(1.205, 1.194), Vector2(1.055, 1.045)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.733333),
+"transitions": PackedFloat32Array(0.420448, 1),
+"update": 0,
+"values": [0.0, 1.33518]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("InteractButtonUi/CollisionShape2D3:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CutArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"create_wood_material"
+}, {
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.666667),
+"transitions": PackedFloat32Array(0.517632, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.345098)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ctj8"]
+_data = {
+"RESET": SubResource("Animation_sh0fj"),
+"chooping": SubResource("Animation_7hhcs"),
+"fall": SubResource("Animation_xa5fn")
+}
 
 [node name="Tree" type="CharacterBody2D"]
+z_index = -5
 collision_layer = 4
 collision_mask = 16
 script = ExtResource("1_haqbx")
 log_scene = ExtResource("2_yxct5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, -39)
 shape = SubResource("RectangleShape2D_g0x2j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.584573, 0.163221, 0.188323, 1)
-scale = Vector2(0.140625, 0.5625)
-texture = ExtResource("2_0tb3c")
+texture = ExtResource("3_wgpx7")
+offset = Vector2(0, -40)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, -40)
+texture = ExtResource("4_l8k3u")
 
 [node name="CutArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CutArea"]
+position = Vector2(-1, -22)
 shape = SubResource("CircleShape2D_x0rn1")
+
+[node name="InteractButtonUi" parent="." instance=ExtResource("4_la5lb")]
+position = Vector2(24, -68)
+show_text = "Hold to 
+Chop Wood"
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="InteractButtonUi"]
+position = Vector2(-25, 46)
+shape = SubResource("CircleShape2D_x0rn1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5ctj8")
+}
 
 [connection signal="body_entered" from="CutArea" to="." method="_on_cut_area_body_entered"]
 [connection signal="body_exited" from="CutArea" to="." method="_on_cut_area_body_exited"]

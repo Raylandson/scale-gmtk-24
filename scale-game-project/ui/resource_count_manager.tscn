@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://q62ee2hbn0aj"]
+
+[ext_resource type="Script" path="res://ui/resource_count_manager.gd" id="1_2j7wh"]
+[ext_resource type="Theme" uid="uid://bbot8f347duf0" path="res://assets/resources/font_theme.tres" id="2_dac15"]
+[ext_resource type="Texture2D" uid="uid://j217o4fahfko" path="res://assets/sprites/wood_icon.png" id="3_d77er"]
+[ext_resource type="Texture2D" uid="uid://dh2ir8d6y5t8w" path="res://assets/sprites/water_icon.png" id="3_tfbei"]
+[ext_resource type="Texture2D" uid="uid://vquoxdnpnw7j" path="res://assets/sprites/ore_icon.png" id="4_0e4f1"]
+
+[node name="ResourceCountManager" type="CanvasLayer"]
+script = ExtResource("1_2j7wh")
+
+[node name="Control" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 31.0
+offset_top = 24.0
+offset_right = -479.0
+offset_bottom = -230.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+visible = false
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/MarginContainer"]
+layout_mode = 2
+
+[node name="hbox" type="VBoxContainer" parent="Control/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer/CenterContainer/hbox"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/CenterContainer/hbox/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_d77er")
+stretch_mode = 2
+
+[node name="WoodLabel" type="Label" parent="Control/MarginContainer/CenterContainer/hbox/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_dac15")
+text = "1"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/MarginContainer/CenterContainer/hbox"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/CenterContainer/hbox/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("4_0e4f1")
+expand_mode = 2
+
+[node name="OreLabel" type="Label" parent="Control/MarginContainer/CenterContainer/hbox/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_dac15")
+text = "1"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/MarginContainer/CenterContainer/hbox"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/MarginContainer/CenterContainer/hbox/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("3_tfbei")
+expand_mode = 2
+
+[node name="Water" type="Label" parent="Control/MarginContainer/CenterContainer/hbox/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_dac15")
+text = "1"

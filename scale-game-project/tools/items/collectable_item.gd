@@ -22,8 +22,8 @@ func random_direction_upwards() -> Vector2:
 
 
 func set_freeze(_bool: bool) -> void:
-	self.freeze = _bool
+	self.call_deferred("set", "freeze", _bool)
 	if is_instance_valid(collision):
-		collision.disabled = _bool
+		collision.call_deferred("set", "disabled", _bool)
 		return
 	print('nao colocou a colisio')
