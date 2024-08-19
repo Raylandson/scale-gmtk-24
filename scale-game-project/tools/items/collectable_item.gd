@@ -2,7 +2,9 @@ extends RigidBody2D
 
 class_name CollectableItem
 
+@export var type: String
 @export_range(1000, 10000) var spawn_velocity_force: float = 3000
+@export var collision: CollisionShape2D
 
 func _ready() -> void:
 	ready()
@@ -21,3 +23,7 @@ func random_direction_upwards() -> Vector2:
 
 func set_freeze(_bool: bool) -> void:
 	self.freeze = _bool
+	if is_instance_valid(collision):
+		collision.disabled = _bool
+		return
+	print('nao colocou a colisio')

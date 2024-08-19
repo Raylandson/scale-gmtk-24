@@ -27,8 +27,8 @@ func _process(delta: float) -> void:
 	
 	
 	if timer < 0:
-		printt(player.carrying, player.wood_carrying, current_itens.size(), 
-		items_list.is_empty(), current_itens, items_list)
+		#printt(player.carrying, player.wood_carrying, current_itens.size(), 
+		#items_list.is_empty(), current_itens, items_list)
 		timer = 0.5
 	
 	can_catch_timer -= delta
@@ -47,7 +47,7 @@ func _process(delta: float) -> void:
 				item.set_freeze(false)
 				var base_vector: Vector2 = item.random_direction_upwards()
 				
-				item.apply_central_force(player.velocity * 30 + \
+				item.apply_central_force(player.velocity * 100 + \
 				base_vector * randf_range(1, 5)) # esse numero magico eh psico
 			current_itens.erase(item)
 			print('item deletado', item.name)

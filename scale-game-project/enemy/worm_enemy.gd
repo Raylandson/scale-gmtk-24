@@ -6,8 +6,10 @@ var current_state = States.MOVING
 @export var speed = 8
 @export var gravity = 50
 @export var attack_distance_threshold = 50
+
 @export var health_points = 50
 @onready var current_health_points = health_points
+
 
 var direction = Vector2.ZERO 
 var target = null
@@ -49,3 +51,22 @@ func _physics_process(delta):
 	elif sign(direction.x) == 1:
 		$AnimationPlayer.play("movingL")
 	move_and_slide()
+
+
+func take_damage(damage : float):
+	current_health_points = max(0, current_health_points - damage)
+	if current_health_points <= 0:
+		death()
+	apply_knockback()
+	
+	var tw = create_tween()
+	tw.tween_property(self, "modulate", Color(1, 1, 1), 0.15).from(Color.DARK_RED).set_trans(Tween.TRANS_QUART)
+
+
+func death():
+	self.queue_free()
+
+
+func apply_knockback():
+	self.global_position += -direction + Vector2(10, 10)
+	pass 

@@ -1,14 +1,134 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvbw83pfh83ca"]
+[gd_scene load_steps=12 format=3 uid="uid://bvbw83pfh83ca"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ct6yo"]
 [ext_resource type="Texture2D" uid="uid://1emngc8345pc" path="res://assets/sprites/farmer_player.png" id="2_201af"]
 [ext_resource type="Script" path="res://player/catch_area.gd" id="3_xw35a"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hj05l"]
+size = Vector2(35, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3f7nw"]
+size = Vector2(28, 61)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ljut"]
 height = 32.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fpmta"]
-radius = 19.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_1eg6l"]
+radius = 18.1108
+
+[sub_resource type="Animation" id="Animation_om044"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/HorizontalAttack/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flip/HorizontalAttack/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Flip/VerticalAttack/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flip/VerticalAttack/ColorRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_uxtfb"]
+resource_name = "horizontal_attack"
+length = 0.28
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/HorizontalAttack/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flip/HorizontalAttack/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_x4yq8"]
+resource_name = "vertical_attack"
+length = 0.278
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/VerticalAttack/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flip/VerticalAttack/ColorRect:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3jy44"]
+_data = {
+"RESET": SubResource("Animation_om044"),
+"horizontal_attack": SubResource("Animation_uxtfb"),
+"vertical_attack": SubResource("Animation_x4yq8")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["CameraChanger"]]
 collision_mask = 17
@@ -26,7 +146,41 @@ texture = ExtResource("2_201af")
 
 [node name="BucketPos" type="Marker2D" parent="Flip"]
 unique_name_in_owner = true
-position = Vector2(-16, -3)
+position = Vector2(-16, 0)
+
+[node name="HorizontalAttack" type="Area2D" parent="Flip"]
+position = Vector2(-21, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flip/HorizontalAttack"]
+shape = SubResource("RectangleShape2D_hj05l")
+disabled = true
+debug_color = Color(0.912239, 1.44392e-06, 0.507846, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Flip/HorizontalAttack"]
+visible = false
+show_behind_parent = true
+offset_left = -18.0
+offset_top = -19.0
+offset_right = 14.0
+offset_bottom = 19.0
+color = Color(0.676098, 0.68039, 0.71938, 1)
+
+[node name="VerticalAttack" type="Area2D" parent="Flip" groups=["player"]]
+position = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Flip/VerticalAttack"]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_3f7nw")
+disabled = true
+debug_color = Color(0.917759, 0.284442, 0.0388521, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="Flip/VerticalAttack"]
+visible = false
+offset_left = -14.0
+offset_top = -43.0
+offset_right = 14.0
+offset_bottom = 19.0
+color = Color(0.67451, 0.678431, 0.717647, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_1ljut")
@@ -39,7 +193,14 @@ player = NodePath("..")
 catch_position = NodePath("../Flip/BucketPos")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CatchArea"]
-shape = SubResource("CircleShape2D_fpmta")
+shape = SubResource("CircleShape2D_1eg6l")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_3jy44")
+}
+
+[connection signal="body_entered" from="Flip/HorizontalAttack" to="." method="_on_horizontal_attack_body_entered"]
+[connection signal="body_entered" from="Flip/VerticalAttack" to="." method="_on_vertical_attack_body_entered"]
 [connection signal="body_entered" from="CatchArea" to="CatchArea" method="_on_body_entered"]
 [connection signal="body_exited" from="CatchArea" to="CatchArea" method="_on_body_exited"]

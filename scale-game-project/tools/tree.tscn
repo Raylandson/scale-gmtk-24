@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://tools/tree.gd" id="1_haqbx"]
 [ext_resource type="Texture2D" uid="uid://bn7jyvcvb1lr6" path="res://icon.svg" id="2_0tb3c"]
-[ext_resource type="PackedScene" uid="uid://ceha2iavrxbq2" path="res://tools/log.tscn" id="3_71a12"]
+[ext_resource type="PackedScene" uid="uid://bvgrp8c2m7ffg" path="res://tools/ore.tscn" id="2_yxct5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0x2j"]
 size = Vector2(20, 72)
@@ -14,7 +14,7 @@ radius = 23.0
 collision_layer = 4
 collision_mask = 16
 script = ExtResource("1_haqbx")
-log_scene = ExtResource("3_71a12")
+log_scene = ExtResource("2_yxct5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_g0x2j")

@@ -8,6 +8,9 @@ STATE_CARRYING, STATE_CUTTING}
 
 const TILE_SIZE = 16
 
+@export var horizontal_attack_damage = 10
+@export var vertical_attack_damage = 15
+
 @export var ground_max_velocity: float = 7.0 * TILE_SIZE
 @export_range (0.01, 2.0) var ground_turn_time: float = 0.15
 @export_range (0.01, 2.0) var ground_accel_time: float = 0.2
@@ -70,6 +73,9 @@ var inside_bucket: bool = false
 @onready var default_cut_time: float = cut_time
 var wood_carrying: bool = false
 
+var is_attacking = false
+
+
 func _process(delta: float) -> void:
 	bucket_follow()
 	if Input.is_action_just_pressed("reset"):
@@ -85,7 +91,7 @@ func _physics_process(delta):
 	manage_animations()
 	
 	
-	#printt(velocity, _g_multiplier, _ground_accel)
+	#printt(velocity, _g_multiplier, _ground_accel)s
 	#print(_actual_state)
 	match _actual_state:
 		STATE_STAND:
@@ -193,6 +199,12 @@ func stand_state(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump()
 	
+	if Input.is_action_pressed("ui_accept"):
+		if Input.is_action_pressed("ui_up"):
+			vertical_attack()
+		else:
+			horizontal_attack()
+	
 	if not is_on_floor():
 		_actual_state = STATE_AIR
 
@@ -214,7 +226,12 @@ func move_state(delta: float) -> void:
 	
 	if not is_on_floor():
 		_actual_state = STATE_AIR
-
+	
+	if Input.is_action_pressed("ui_accept"):
+		if Input.is_action_pressed("ui_up"):
+			vertical_attack()
+		else:
+			horizontal_attack()
 
 func air_state(delta: float) -> void:
 	flip_nodes()
@@ -237,6 +254,12 @@ func air_state(delta: float) -> void:
 		_g_multiplier = _gravity_multiplier
 	
 	coyote_time -= delta
+	
+	if Input.is_action_pressed("ui_accept"):
+		if Input.is_action_pressed("ui_up"):
+			vertical_attack()
+		else:
+			horizontal_attack()
 	
 	if _jump_pressed:
 		buffering_time -= delta
@@ -345,3 +368,28 @@ func manage_animations():
 func flip_nodes() -> void:
 	if _direction:
 		$Flip.scale.x = -_direction
+
+
+func _on_horizontal_attack_body_entered(body: Node2D) -> void:
+	if body.is_in_group("enemy"):
+		body.take_damage(horizontal_attack_damage)
+
+
+func _on_vertical_attack_body_entered(body: Area2D) -> void:
+	if body.is_in_group("enemy"):
+		body.take_damage(vertical_attack_damage)
+
+
+func horizontal_attack():
+	if is_attacking == false:
+		is_attacking = true
+		$AnimationPlayer.play("horizontal_attack")
+		await get_tree().create_timer(0.6)
+		is_attacking = false
+		
+func vertical_attack():
+	if is_attacking == false:
+		is_attacking = true
+		$AnimationPlayer.play("vertical_attack")
+		await get_tree().create_timer(0.6)
+		is_attacking = false

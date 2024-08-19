@@ -13,14 +13,16 @@ radius = 3.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_na70n"]
 radius = 15.0
 
-[node name="Log" type="RigidBody2D" groups=["CatchItem"]]
+[node name="Log" type="RigidBody2D" node_paths=PackedStringArray("collision") groups=["CatchItem"]]
 collision_layer = 8
 collision_mask = 24
 mass = 0.805
 physics_material_override = SubResource("PhysicsMaterial_ivv3t")
 center_of_mass_mode = 1
 script = ExtResource("1_ykr6o")
+type = "wood"
 spawn_velocity_force = 10000.0
+collision = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_6l1ut")

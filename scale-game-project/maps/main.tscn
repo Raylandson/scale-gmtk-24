@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://b1o4b47kfvsbr"]
+[gd_scene load_steps=26 format=4 uid="uid://b1o4b47kfvsbr"]
 
 [ext_resource type="Texture2D" uid="uid://bn7jyvcvb1lr6" path="res://icon.svg" id="1_3crm5"]
 [ext_resource type="PackedScene" uid="uid://bvbw83pfh83ca" path="res://player/player.tscn" id="2_plovj"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://c5hm2j8s4wnhj" path="res://assets/sprites/crow3.png" id="14_8gc8x"]
 [ext_resource type="PackedScene" uid="uid://bkda8mouc26ie" path="res://tools/tree.tscn" id="15_cphb1"]
 [ext_resource type="PackedScene" uid="uid://bvgrp8c2m7ffg" path="res://tools/ore.tscn" id="16_msvac"]
+[ext_resource type="Script" path="res://maps/debug_material_count.gd" id="17_rtbgs"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hp6w0"]
 texture = ExtResource("1_3crm5")
@@ -162,7 +163,10 @@ tile_map_data = PackedByteArray("AAAVAP//AwAAAAAAAAAUAP//AwAAAAAAAAATAP//AwAAAAA
 tile_set = SubResource("TileSet_2udw2")
 
 [node name="Seed" parent="." instance=ExtResource("10_i48q2")]
-position = Vector2(288, 210)
+position = Vector2(285, 209)
+
+[node name="WormEnemy3" parent="." instance=ExtResource("11_fvv4m")]
+position = Vector2(489, 222)
 
 [node name="Player" parent="." instance=ExtResource("2_plovj")]
 physics_interpolation_mode = 1
@@ -259,3 +263,10 @@ position = Vector2(153, 177)
 
 [node name="Ore4" parent="." instance=ExtResource("16_msvac")]
 position = Vector2(143, 203)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 23.0
+script = ExtResource("17_rtbgs")
