@@ -1,8 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bnw78ilcjgphd"]
+[gd_scene load_steps=8 format=3 uid="uid://c71om55bo0pvw"]
 
-[ext_resource type="Script" path="res://attacks/sword_lvl_1.gd" id="1_tn0l5"]
-[ext_resource type="Texture2D" uid="uid://csu03bt4n82s4" path="res://assets/sprites/slash2.png" id="1_ufly2"]
-[ext_resource type="Texture2D" uid="uid://k8romixa2sp" path="res://assets/sprites/sword_lvl2.png" id="2_uix6p"]
+[ext_resource type="Script" path="res://attacks/sword_lvl_1.gd" id="1_n5h1n"]
+[ext_resource type="Texture2D" uid="uid://bor53ffjejr5i" path="res://assets/sprites/slash_black.png" id="2_qwy4d"]
+[ext_resource type="Texture2D" uid="uid://r3n1cahdnhrx" path="res://assets/sprites/black_sword.png" id="3_y7d0l"]
 
 [sub_resource type="Animation" id="Animation_bwlfq"]
 length = 0.001
@@ -165,20 +165,20 @@ _data = {
 "Slash": SubResource("Animation_t5ddo")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hxadh"]
-size = Vector2(64, 66)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6a328"]
+size = Vector2(58, 66)
 
-[node name="sword_lvl2" type="Area2D"]
-script = ExtResource("1_tn0l5")
-attack_damage = 20
+[node name="SwordLvl3" type="Area2D"]
+script = ExtResource("1_n5h1n")
+attack_damage = 30
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(15, -7)
-texture = ExtResource("1_ufly2")
+position = Vector2(20, -7)
+texture = ExtResource("2_qwy4d")
 hframes = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_uix6p")
+texture = ExtResource("3_y7d0l")
 offset = Vector2(0, -12)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -188,6 +188,6 @@ libraries = {
 autoplay = "Slash"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(29, -12)
-shape = SubResource("RectangleShape2D_hxadh")
+position = Vector2(30, -12)
+shape = SubResource("RectangleShape2D_6a328")
 disabled = true

@@ -3,6 +3,13 @@ class_name Seed
 
 @export var anim_time: float = 0.4
 @onready var seed = $Seed
+@onready var plant_size_bar = $PlantSizeBar
+var size_level = 1
+var xp_to_size_level = 100
+var current_xp = 0
+
+
+
 
 @export var recover_time: float = 5
 @onready var default_recover_time: float = recover_time
@@ -12,6 +19,8 @@ var recover_multiplier := 1
 
 func _ready():
 	add_to_group("seed")
+	$PlantSizeBar.max_value = xp_to_size_level
+
 
 
 func _process(delta: float) -> void:
@@ -21,12 +30,20 @@ func _process(delta: float) -> void:
 	if recover_time < 0:
 		current_life += 1
 		recover_time = default_recover_time * recover_multiplier
-
+	current_xp += 20 * delta
+	$PlantSizeBar.value = current_xp
+	
+	#print(current_xp)
+	
+	if current_xp >= xp_to_size_level:
+		update_level_up()
 
 func take_damage(num: float) -> void:
 	current_life -= num
 	if current_life <= 0:
 		print('its over, brutal')
+
+
 
 
 func _on_collect_area_body_entered(body: Node2D) -> void:
@@ -55,5 +72,11 @@ func _on_collect_area_body_exited(body: Node2D) -> void:
 	if body is Actor:
 		body.inside_upgrade_area = false
 		body.queue_free()
-		
-		#tw.tween_property($Seed, "modulate")
+
+
+func update_level_up():
+	current_xp = 0
+	$Seed.frame = min(size_level, 4)
+	size_level += 1
+	$PlantSizeBar.value = current_xp
+	$PlantSizeBar.max_value = xp_to_size_level
