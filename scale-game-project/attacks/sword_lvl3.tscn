@@ -169,17 +169,19 @@ _data = {
 size = Vector2(58, 66)
 
 [node name="SwordLvl3" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
 script = ExtResource("1_n5h1n")
 attack_damage = 30
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(20, -7)
+position = Vector2(26, -9)
 texture = ExtResource("2_qwy4d")
 hframes = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("3_y7d0l")
-offset = Vector2(0, -12)
+offset = Vector2(0, -21.485)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

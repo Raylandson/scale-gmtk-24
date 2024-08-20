@@ -24,8 +24,8 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_sw378")
 
 [node name="Seed" type="Sprite2D" parent="."]
-position = Vector2(3, -47)
 texture = ExtResource("1_8rdpw")
+offset = Vector2(3, -47)
 hframes = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -33,10 +33,10 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_taeee")
 
 [node name="PlantSizeBar" type="TextureProgressBar" parent="."]
-offset_left = -69.0
-offset_top = -34.0
-offset_right = -14.0
-offset_bottom = -28.0
+offset_left = -86.0
+offset_top = -101.0
+offset_right = -31.0
+offset_bottom = -95.0
 exp_edit = true
 allow_lesser = true
 texture_under = ExtResource("3_5xawq")

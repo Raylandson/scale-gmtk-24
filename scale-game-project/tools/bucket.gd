@@ -38,7 +38,7 @@ func _process(delta: float) -> void:
 		#gravity = 0
 		#set_process(false)
 		print('pegando')
-
+	$Sprite2D.frame = not full()
 
 
 

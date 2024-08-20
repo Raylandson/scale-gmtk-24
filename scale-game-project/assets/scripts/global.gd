@@ -6,10 +6,10 @@ signal upgrade_thornmail
 signal upgrade_sword_2
 signal upgrade_sword_berzek
 signal upgrade_slow_area
-
+signal call_shake
 
 var wood : int = 0
-var water : float = 0.0
+var water : float = 10.0
 var ore : int = 0
 
 var dict_vars: Dictionary = {

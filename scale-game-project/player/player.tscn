@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bvbw83pfh83ca"]
+[gd_scene load_steps=36 format=3 uid="uid://bvbw83pfh83ca"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ct6yo"]
 [ext_resource type="Texture2D" uid="uid://1emngc8345pc" path="res://assets/sprites/farmer_player.png" id="2_201af"]
@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvgrp8c2m7ffg" path="res://tools/ore.tscn" id="4_b6e1s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgwwu"]
-size = Vector2(34, 66)
+size = Vector2(34, 63)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1ljut"]
 height = 32.0
@@ -136,10 +136,28 @@ tracks/0/keys = {
 "values": [4, 5, 7]
 }
 
+[sub_resource type="Animation" id="Animation_erna1"]
+resource_name = "hold_walk"
+length = 0.388
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.166667, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 9, 11, 10]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_3jy44"]
 _data = {
 "RESET": SubResource("Animation_om044"),
 "hold": SubResource("Animation_kt3av"),
+"hold_walk": SubResource("Animation_erna1"),
 "idle": SubResource("Animation_vhqv4"),
 "jump": SubResource("Animation_8g7dt"),
 "tree": SubResource("Animation_20kc8"),
@@ -148,6 +166,9 @@ _data = {
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n7eqf"]
 animation = &"hold"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ffkw2"]
+animation = &"hold_walk"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_84lxb"]
 animation = &"idle"
@@ -183,10 +204,16 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jev3a"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ms2pq"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nftfh"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_l6sgi"]
 states/End/position = Vector2(193, 184)
 states/hold/node = SubResource("AnimationNodeAnimation_n7eqf")
 states/hold/position = Vector2(333, 63)
+states/hold_walk/node = SubResource("AnimationNodeAnimation_ffkw2")
+states/hold_walk/position = Vector2(361, 212)
 states/idle/node = SubResource("AnimationNodeAnimation_84lxb")
 states/idle/position = Vector2(333, 151)
 states/jump/node = SubResource("AnimationNodeAnimation_ybun5")
@@ -195,7 +222,7 @@ states/tree/node = SubResource("AnimationNodeAnimation_nejmg")
 states/tree/position = Vector2(456, 54)
 states/walk/node = SubResource("AnimationNodeAnimation_0q4oo")
 states/walk/position = Vector2(595, 63)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_s3jb8"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_hf2d4"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_emfj8"), "idle", "tree", SubResource("AnimationNodeStateMachineTransition_jfbtf"), "idle", "hold", SubResource("AnimationNodeStateMachineTransition_8iihr"), "hold", "idle", SubResource("AnimationNodeStateMachineTransition_qnw01"), "tree", "idle", SubResource("AnimationNodeStateMachineTransition_xu8e3"), "jump", "walk", SubResource("AnimationNodeStateMachineTransition_qtivi"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_pdshf"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_jev3a")]
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_s3jb8"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_hf2d4"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_emfj8"), "idle", "tree", SubResource("AnimationNodeStateMachineTransition_jfbtf"), "idle", "hold", SubResource("AnimationNodeStateMachineTransition_8iihr"), "hold", "idle", SubResource("AnimationNodeStateMachineTransition_qnw01"), "tree", "idle", SubResource("AnimationNodeStateMachineTransition_xu8e3"), "jump", "walk", SubResource("AnimationNodeStateMachineTransition_qtivi"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_pdshf"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_jev3a"), "hold_walk", "idle", SubResource("AnimationNodeStateMachineTransition_ms2pq"), "idle", "hold_walk", SubResource("AnimationNodeStateMachineTransition_nftfh")]
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("catch_area", "enemy_area") groups=["CameraChanger"]]
 collision_mask = 17
@@ -212,7 +239,7 @@ coyote_time = 0.154
 
 [node name="Sprite2D" type="Sprite2D" parent="Flip"]
 texture = ExtResource("2_201af")
-hframes = 9
+hframes = 12
 
 [node name="MiningPos" type="Marker2D" parent="Flip" node_paths=PackedStringArray("player")]
 position = Vector2(3, 22)
@@ -233,7 +260,7 @@ collision_mask = 4
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Flip/AtkPivot/EnemyArea"]
-position = Vector2(18, -12)
+position = Vector2(18, -10.5)
 shape = SubResource("RectangleShape2D_vgwwu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

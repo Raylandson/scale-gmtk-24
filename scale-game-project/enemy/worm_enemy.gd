@@ -45,6 +45,7 @@ func _physics_process(delta):
 			#print('crawling in my skin')
 			gravity_scale = 0
 			self.modulate.a = 0.5
+			$Seed.scale = Vector2(0.5, 0.5)
 			if is_instance_valid(target):
 				direction = global_position.direction_to(floor_pos)
 			
@@ -65,12 +66,14 @@ func _physics_process(delta):
 		States.IDLE:
 			self.modulate.a = 1
 			direction = Vector2.ZERO
+			$Seed.scale = Vector2(1, 1)
 			
 			if is_instance_valid(target) and self.global_position.distance_to(target.global_position) < attack_distance_threshold:
 				current_state = States.ATTACKING
 				
 		States.MOVING:
 			self.modulate.a = 1
+			$Seed.scale = Vector2(1, 1)
 			if is_instance_valid(target):
 				var distance_to_target: float = self.global_position.distance_to(target.global_position) 
 				direction = self.global_position.direction_to(target.global_position).normalized()
@@ -87,7 +90,7 @@ func _physics_process(delta):
 			if is_instance_valid(tile_map):
 				var cell_id: = tile_map.get_cell_source_id(
 					tile_map.local_to_map(%Marker2D.global_position))
-				print(cell_id)
+				#print(cell_id)
 				if cell_id != -1 and not jumped:
 					jumped = true
 					self.velocity.y = -jump_speed

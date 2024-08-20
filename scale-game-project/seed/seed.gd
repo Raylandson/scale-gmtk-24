@@ -8,14 +8,12 @@ var size_level = 1
 var xp_to_size_level = 100
 var current_xp = 0
 
-
-
-
 @export var recover_time: float = 5
 @onready var default_recover_time: float = recover_time
 @onready var max_life = Globals.plant_max_life
 @onready var current_life = max_life
 var recover_multiplier := 1
+
 
 func _ready():
 	add_to_group("seed")
@@ -38,12 +36,11 @@ func _process(delta: float) -> void:
 	if current_xp >= xp_to_size_level:
 		update_level_up()
 
+
 func take_damage(num: float) -> void:
 	current_life -= num
 	if current_life <= 0:
 		print('its over, brutal')
-
-
 
 
 func _on_collect_area_body_entered(body: Node2D) -> void:
