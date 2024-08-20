@@ -4,8 +4,29 @@ class_name Seed
 @export var anim_time: float = 0.4
 @onready var seed = $Seed
 
+@export var recover_time: float = 5
+@onready var default_recover_time: float = recover_time
+@onready var max_life = Globals.plant_max_life
+@onready var current_life = max_life
+var recover_multiplier := 1
+
 func _ready():
 	add_to_group("seed")
+
+
+func _process(delta: float) -> void:
+	if current_life < max_life:
+		recover_time -= delta
+	
+	if recover_time < 0:
+		current_life += 1
+		recover_time = default_recover_time * recover_multiplier
+
+
+func take_damage(num: float) -> void:
+	current_life -= num
+	if current_life <= 0:
+		print('its over, brutal')
 
 
 func _on_collect_area_body_entered(body: Node2D) -> void:

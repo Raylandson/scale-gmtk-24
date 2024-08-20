@@ -21,6 +21,11 @@ func mine_cell(cell_id: int, cell_position:Vector2i) -> void:
 	generate_ore(tile_map.map_to_local(cell_position))
 
 
+func can_mining() -> bool:
+	var cell_position: = tile_map.local_to_map(self.global_position)
+	return tile_map.get_cell_source_id(cell_position) == 0
+
+
 func generate_ore(ore_pos: Vector2) -> void:
 	for a in range(2):
 		var ore_instance: CollectableItem = ore.instantiate()

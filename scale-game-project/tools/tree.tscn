@@ -194,13 +194,13 @@ _data = {
 
 [node name="Tree" type="CharacterBody2D"]
 z_index = -5
-collision_layer = 4
+collision_layer = 8
 collision_mask = 16
 script = ExtResource("1_haqbx")
 log_scene = ExtResource("2_l782i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.5, -39)
+position = Vector2(-2, -39)
 shape = SubResource("RectangleShape2D_g0x2j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

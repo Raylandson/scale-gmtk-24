@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://b1o4b47kfvsbr"]
+[gd_scene load_steps=23 format=4 uid="uid://b1o4b47kfvsbr"]
 
 [ext_resource type="Script" path="res://maps/main.gd" id="1_x81kf"]
 [ext_resource type="PackedScene" uid="uid://lqqw6umf8nkf" path="res://tools/enemy_generator.tscn" id="2_3xqak"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cpbjwgxr7f1t3" path="res://tools/well.tscn" id="3_lqstf"]
 [ext_resource type="TileSet" uid="uid://d4lsxrvore2kd" path="res://maps/main_tilemap.tres" id="4_djbj2"]
 [ext_resource type="Texture2D" uid="uid://da11bqf68dx36" path="res://assets/sprites/block1.png" id="4_eegjt"]
+[ext_resource type="PackedScene" uid="uid://cvppqdg3ibf2v" path="res://tools/thornmail.tscn" id="4_x7sr5"]
 [ext_resource type="Texture2D" uid="uid://bgsu8m783oyko" path="res://assets/sprites/ground_block.png" id="5_0jobx"]
 [ext_resource type="Texture2D" uid="uid://8bt5v3qdmo27" path="res://assets/sprites/background.png" id="7_jfc0p"]
 [ext_resource type="Shader" path="res://assets/crt_filter.gdshader" id="8_qi8lb"]
@@ -71,6 +72,11 @@ chance_to_spawn_well = 0.398
 tree_scene = ExtResource("15_cphb1")
 well_scene = ExtResource("3_lqstf")
 metadata/_edit_horizontal_guides_ = [-105.0]
+
+[node name="Thornmail" parent="." instance=ExtResource("4_x7sr5")]
+collision_layer = 4
+collision_mask = 4
+monitorable = false
 
 [node name="EnemyGenerator" parent="." node_paths=PackedStringArray("floor_height") instance=ExtResource("2_3xqak")]
 min_spawn_distance = 800.0

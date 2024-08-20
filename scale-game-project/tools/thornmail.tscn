@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cvppqdg3ibf2v"]
+
+[ext_resource type="Script" path="res://tools/thornmail.gd" id="1_ljafd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_31vpd"]
+radius = 70.0
+
+[node name="Thornmail" type="Area2D" node_paths=PackedStringArray("timer")]
+position = Vector2(285, 212)
+script = ExtResource("1_ljafd")
+timer = NodePath("Timer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_31vpd")
+disabled = true
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
