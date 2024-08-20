@@ -20,8 +20,9 @@ func _process(delta: float) -> void:
 			else:
 				%Timer.start(Globals.well_fill_multiplier * time_to_fill_water)
 				water_quantity = _player._bucket.catch_water(water_quantity)
+				self.modulate.a = 0.2
 			#_player.change_velocity_multiplier()
-
+	
 
 func _on_body_entered(body: Node2D) -> void:
 	
@@ -54,4 +55,5 @@ func _on_timer_timeout() -> void:
 		%Timer.stop()
 		return
 	water_quantity += 1
+	self.modulate.a = 1
 	

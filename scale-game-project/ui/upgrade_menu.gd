@@ -2,8 +2,9 @@ extends CanvasLayer
 
 var player_offensive_index = 0
 var current_upgrade: String
-var indexes_list:Array = [0, 0, 0]
-
+var indexes_list:Array = [0, 0, 0, 0]
+var _timer = 0
+var time_to_press = 0.5
 var upgrades = [
 	[
 		# player ofensivo
@@ -146,6 +147,21 @@ var upgrades = [
 ]
 
 
+func _input(event):
+	if event.is_action_pressed("x"):
+		get_tree().paused = false
+		self.hide()
+		
+
+
+func self_show():
+	if _timer >= time_to_press:
+		get_tree().paused = true
+		$"%Upgrade".grab_focus()
+		self.show()
+		_timer = 0
+
+
 func upgrade_cut_speed() -> void:
 	Globals.cut_speed_multi -= 0.2
 	
@@ -239,6 +255,7 @@ func update() -> void:
 
 
 func _ready() -> void:
+	Globals.show_upgrades.connect(self_show)
 	update()
 
 var current_index = 0
@@ -260,6 +277,7 @@ func previous_upgrade() -> void:
 
 
 func _process(delta):
+	_timer += delta
 	pass
 	#if Input.is_action_just_pressed("ui_accept"):
 		#var current_upgrade = upgrades[0][player_offensive_index]

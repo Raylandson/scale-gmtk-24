@@ -104,7 +104,8 @@ func _ready():
 func _physics_process(delta):
 	_direction = get_direction()
 	manage_animations()
-	
+	if inside_upgrade_area and Input.is_action_just_pressed("x"):
+		Globals.emit_signal("show_upgrades")
 	
 	#printt(velocity, _g_multiplier, _ground_accel)s
 	#print(Globals.speed_multi)

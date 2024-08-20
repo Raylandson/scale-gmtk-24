@@ -3,9 +3,8 @@ class_name Seed
 
 @export var anim_time: float = 0.4
 @onready var seed = $Seed
-@onready var plant_size_bar = $PlantSizeBar
 var size_level = 1
-var xp_to_size_level = 100
+@onready var xp_to_size_level = 30 * size_level
 var current_xp = 0
 
 @export var recover_time: float = 5
@@ -17,7 +16,6 @@ var recover_multiplier := 1
 
 func _ready():
 	add_to_group("seed")
-	$PlantSizeBar.max_value = xp_to_size_level
 
 
 
@@ -29,7 +27,6 @@ func _process(delta: float) -> void:
 		current_life += 1
 		recover_time = default_recover_time * recover_multiplier
 	current_xp += 20 * delta
-	$PlantSizeBar.value = current_xp
 	
 	#print(current_xp)
 	
@@ -79,7 +76,31 @@ func _on_collect_area_body_exited(body: Node2D) -> void:
 
 func update_level_up():
 	current_xp = 0
-	$Seed.frame = min(size_level, 4)
+	$Seed.frame = min(size_level, 8)
+	Globals.emit_signal("call_shake", 0.2, 12, 6)
+	
+	match $Seed.frame:
+		4:
+			$Leaf2/CollisionShape2D.disabled = false
+		3:
+			$Leaf/CollisionShape2D.disabled = false
+		5: 
+			$Leaf3/CollisionShape2D.disabled = false
+			$Leaf4/CollisionShape2D.disabled = false
+		6:
+			$Leaf5/CollisionShape2D.disabled = false
+			$Leaf6/CollisionShape2D.disabled = false
+		7:
+			$Leaf7/CollisionShape2D.disabled = false
+			$Leaf8/CollisionShape2D.disabled = false
+			$Leaf9/CollisionShape2D.disabled = false
+			$Leaf10/CollisionShape2D.disabled = false
+		8:
+			$Leaf11/CollisionShape2D.disabled = false
+			$Leaf12/CollisionShape2D.disabled = false
+			$Leaf13/CollisionShape2D.disabled = false
+			$Leaf14/CollisionShape2D.disabled = false
+			$Leaf15/CollisionShape2D.disabled = false
+			$Leaf16/CollisionShape2D.disabled = false
+	
 	size_level += 1
-	$PlantSizeBar.value = current_xp
-	$PlantSizeBar.max_value = xp_to_size_level

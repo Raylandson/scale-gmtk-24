@@ -7,6 +7,7 @@ signal upgrade_sword_2
 signal upgrade_sword_berzek
 signal upgrade_slow_area
 signal call_shake
+signal show_upgrades
 
 var wood : int = 0
 var water : int = 0
