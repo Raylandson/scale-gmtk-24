@@ -11,7 +11,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	#Engine.time_scale = 2
+	Engine.time_scale = 7
 	var next_spawn_distance := randi_range(min_blocks_between_resources, max_blocks_between_resources)
 	var current_distance := 0
 	var next_block_replace: bool = false

@@ -180,5 +180,14 @@ shape = SubResource("RectangleShape2D_gc5pb")
 disabled = true
 one_way_collision = true
 
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+z_index = 30
+offset_left = -46.0
+offset_top = 18.0
+offset_right = 92.0
+offset_bottom = 34.0
+text = "[X] Upgrade"
+
 [connection signal="body_entered" from="CollectArea" to="." method="_on_collect_area_body_entered"]
 [connection signal="body_exited" from="CollectArea" to="." method="_on_collect_area_body_exited"]

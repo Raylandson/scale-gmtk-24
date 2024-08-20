@@ -53,7 +53,7 @@ func full() -> bool:
 func _on_timer_timeout() -> void:
 	if full():
 		%Timer.stop()
+		self.modulate.a = 1
 		return
 	water_quantity += 1
-	self.modulate.a = 1
 	

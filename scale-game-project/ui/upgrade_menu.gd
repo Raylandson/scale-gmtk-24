@@ -35,6 +35,13 @@ var upgrades = [
 			'water': 10,
 			'wood': 5,
 			'ore': 30
+		},
+		{
+			'nome': 'Max level Reached',
+			'upgrade': 'bosonaro',
+			'water': 0,
+			'wood': 0,
+			'ore': 0
 		}
 	],
 	# plant defense
@@ -224,6 +231,8 @@ func apply_upgrade() -> void:
 	
 	if has_method(current_upgrade):
 		var dir = upgrades[current_index][indexes_list[current_index]]
+		print( Globals.dict_vars['ore'] >= dir['ore'], Globals.dict_vars['water'] >= dir['water'],
+			Globals.dict_vars['wood'] >= dir['wood'])
 		if Globals.dict_vars['ore'] >= dir['ore'] and Globals.dict_vars['water'] >= dir['water'] and\
 		Globals.dict_vars['wood'] >= dir['wood']:
 			Globals.dict_vars['ore'] -= dir['ore']

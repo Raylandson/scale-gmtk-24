@@ -27,22 +27,6 @@ shader_parameter/roll_speed = -8.0
 shader_parameter/scan_line_strength = -5.412
 shader_parameter/pixel_strength = 0.0
 
-[sub_resource type="Animation" id="Animation_tt5m5"]
-resource_name = "i"
-length = 0.701
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.566667),
-"transitions": PackedFloat32Array(0.482968, 3.13834),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_xweuy"]
 length = 0.001
 tracks/0/type = "value"
@@ -56,6 +40,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_tt5m5"]
+resource_name = "i"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(0.482968, 3.13834),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_42g0e"]
@@ -166,8 +166,10 @@ offset_left = 132.0
 offset_top = 124.0
 offset_right = 415.0
 offset_bottom = 181.0
-text = "In Memory of one Brazilian Star.
-R.I.P Silvio Santos (1931 - 2024)
+text = "Thanks for playing
+
+In Memory of one Brazilian Star.
+R.I.P Silvio Santos (1930 - 2024)
 "
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -4,7 +4,7 @@ class_name Seed
 @export var anim_time: float = 0.4
 @onready var seed = $Seed
 var size_level = 1
-@onready var xp_to_size_level = 30 * size_level
+@onready var xp_to_size_level = 45 * size_level
 var current_xp = 0
 
 @export var recover_time: float = 5
@@ -15,6 +15,7 @@ var recover_multiplier := 1
 
 
 func _ready():
+	%Label.visible = false
 	add_to_group("seed")
 	
 
@@ -27,7 +28,7 @@ func _process(delta: float) -> void:
 	if recover_time < 0:
 		current_life += 1
 		recover_time = default_recover_time * recover_multiplier
-	current_xp += 20 * delta
+	current_xp += delta
 	
 	#print(current_xp)
 	
@@ -44,6 +45,7 @@ func take_damage(num: float) -> void:
 
 func _on_collect_area_body_entered(body: Node2D) -> void:
 	if body is Actor:
+		%Label.visible = true
 		body.inside_upgrade_area = true
 	
 	if body is Bucket:
@@ -72,6 +74,7 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 
 func _on_collect_area_body_exited(body: Node2D) -> void:
 	if body is Actor:
+		%Label.visible = false
 		body.inside_upgrade_area = false
 		#body.queue_free()
 
