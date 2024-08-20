@@ -3,10 +3,9 @@
 [ext_resource type="Script" path="res://enemies/shooter_enemy.gd" id="1_gev2i"]
 [ext_resource type="PackedScene" uid="uid://pndo32v6x7cu" path="res://enemies/bullet.tscn" id="2_3hwbg"]
 
-[node name="ShooterEnemy" type="Node2D" node_paths=PackedStringArray("player", "timer")]
+[node name="ShooterEnemy" type="Node2D" node_paths=PackedStringArray("timer")]
 script = ExtResource("1_gev2i")
 bullet = ExtResource("2_3hwbg")
-player = NodePath("")
 timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]

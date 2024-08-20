@@ -19,6 +19,7 @@ offset_right = -479.0
 offset_bottom = -230.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Panel" type="Panel" parent="Control"]
 visible = false

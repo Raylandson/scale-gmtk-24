@@ -214,7 +214,10 @@ func friction(frict: float, delta: float):
 
 func stand_state(delta: float) -> void:
 	flip_nodes()
-	state_machine.travel("idle")
+	if wood_carrying or carrying:
+		state_machine.travel("hold")
+	else:
+		state_machine.travel("idle")
 	friction(_ground_fric, delta)
 	
 	#velocity.x = clamp(velocity.x, -ground_max_velocity, ground_max_velocity)
@@ -234,8 +237,12 @@ func stand_state(delta: float) -> void:
 
 func move_state(delta: float) -> void:
 	flip_nodes()
-	#SPEED MULTIPLIER BRONCA BRONCA ALARME
-	state_machine.travel("walk")
+	#SPEED MULTIPLIER BRONCA BRONCA ALARME]
+	if wood_carrying or carrying:
+		state_machine.travel("hold_walk")
+	else:
+		state_machine.travel("walk")
+	
 	movement(_ground_accel, _ground_turn_accel, ground_max_velocity * Globals.speed_multi, delta)
 		
 	if _direction == 0.0:

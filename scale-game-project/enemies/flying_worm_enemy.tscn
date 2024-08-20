@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=3 uid="uid://bh230ue2idb2"]
+
+[ext_resource type="Script" path="res://enemies/flying_worm_enemy.gd" id="1_pawl1"]
+[ext_resource type="Texture2D" uid="uid://dwx7tfo4oapgn" path="res://assets/sprites/flyingworm.png" id="1_sfawm"]
+
+[sub_resource type="Animation" id="Animation_rkbhe"]
+resource_name = "flying"
+length = 0.263
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/Flyingworm:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_v6bld"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flip/Flyingworm:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_byq74"]
+_data = {
+"RESET": SubResource("Animation_v6bld"),
+"flying": SubResource("Animation_rkbhe")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_42g13"]
+radius = 16.3173
+height = 43.0289
+
+[node name="FlyingWormEnemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_pawl1")
+speed = 10
+health_points = 20
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_byq74")
+}
+autoplay = "flying"
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="Flyingworm" type="Sprite2D" parent="Flip"]
+texture = ExtResource("1_sfawm")
+flip_h = true
+hframes = 2
+
+[node name="Marker2D" type="Marker2D" parent="Flip"]
+position = Vector2(23.6295, -4.80186)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_42g13")
