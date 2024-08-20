@@ -194,3 +194,5 @@ autoplay = "Slash"
 position = Vector2(29, -12)
 shape = SubResource("RectangleShape2D_hxadh")
 disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

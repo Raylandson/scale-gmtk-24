@@ -170,7 +170,7 @@ size = Vector2(58, 66)
 
 [node name="SwordLvl3" type="Area2D"]
 collision_layer = 4
-collision_mask = 4
+collision_mask = 20
 script = ExtResource("1_n5h1n")
 attack_damage = 30
 
@@ -193,3 +193,5 @@ autoplay = "Slash"
 position = Vector2(30, -12)
 shape = SubResource("RectangleShape2D_6a328")
 disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

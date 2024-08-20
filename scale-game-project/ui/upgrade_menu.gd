@@ -4,37 +4,37 @@ var player_offensive_index = 0
 var current_upgrade: String
 var indexes_list:Array = [0, 0, 0, 0]
 var _timer = 0
-var time_to_press = 0.5
+var time_to_press = 0.3
 var upgrades = [
 	[
 		# player ofensivo
 		{
-			'nome': 'Sword Damage +',
+			'nome': 'Sword Upgrade 1 (Damage+)',
 			'upgrade': 'upgrade_sword_damage',
-			'water': 2,
+			'water': 0,
 			'wood': 2,
-			'ore': 2
+			'ore': 4
 		},
 		{
-			'nome': 'Stronger Sword (lvl2)',
+			'nome': 'Iron LongSword',
 			'upgrade': 'upgrade_stronger_sword',
 			'water': 2,
-			'wood': 2,
-			'ore': 2
+			'wood': 8,
+			'ore': 10
 		},
 		{
-			'nome': 'Sword Damage +',
+			'nome': 'Sword Upgrade 2 (Damage+)',
 			'upgrade': 'upgrade_sword_damage',
-			'water': 2,
-			'wood': 2,
-			'ore': 2
+			'water': 5,
+			'wood': 10,
+			'ore': 18
 		},
 		{
-			'nome': 'Berzek Sword (Max)',
+			'nome': 'Black Night Sword (Max Level)',
 			'upgrade': 'upgrade_berzerk_sword',
-			'water': 2,
-			'wood': 2,
-			'ore': 2
+			'water': 10,
+			'wood': 5,
+			'ore': 30
 		}
 	],
 	# plant defense
@@ -47,21 +47,21 @@ var upgrades = [
 			'ore': 2
 		},
 		{
-			'nome': 'Thornmail',
+			'nome': 'Attaking Spikes (Periodical Damage)',
 			'upgrade': 'upgrade_thornmail',
-			'water': 2,
-			'wood': 3,
-			'ore': 0
+			'water': 10,
+			'wood': 5,
+			'ore': 5
 		},
 		{
-			'nome': 'Plant Heal Faster',
+			'nome': 'Plant Regeneration',
 			'upgrade': 'upgrade_plant_heal_faster',
 			'water': 2,
 			'wood': 3,
 			'ore': 0
 		},
 		{
-			'nome': 'Plant Slow Area (Slow nearby Enemies)',
+			'nome': 'Slow nearby Enemies',
 			'upgrade': 'upgrade_slow_area',
 			'water': 2,
 			'wood': 3,
@@ -78,32 +78,32 @@ var upgrades = [
 	# well upgrades
 	[
 		{
-			'nome': 'well fill velocity +',
+			'nome': 'Well Refill (+)',
 			'upgrade': 'upgrade_well_fill_velocity',
-			'water': 0,
-			'wood': 4,
+			'water': 8,
+			'wood': 0,
 			'ore': 5
 		},
 		{
 			'nome': 'well max water +',
 			'upgrade': 'upgrade_well_max_water',
-			'water': 0,
-			'wood': 3,
-			'ore': 4
+			'water': 12,
+			'wood': 4,
+			'ore': 10
 		},
 		{
-			'nome': 'well fill velocity (lvl 2) ++',
+			'nome': 'Well Refill (++)',
 			'upgrade': 'upgrade_well_fill_velocity',
-			'water': 0,
-			'wood': 5,
-			'ore': 5
+			'water': 18,
+			'wood': 6,
+			'ore': 12
 		},
 		{
 			'nome': 'bucket max water +',
 			'upgrade': 'upgrade_bucket_max_water',
-			'water': 0,
+			'water': 22,
 			'wood': 2,
-			'ore': 6
+			'ore': 2
 		},
 		{
 			'nome': 'Max level Reached',
@@ -115,25 +115,25 @@ var upgrades = [
 	],
 	[
 		{
-			'nome': 'Cut speed +',
+			'nome': 'Chop Speed',
 			'upgrade': 'upgrade_cut_speed',
-			'water': 0,
-			'wood': 2,
-			'ore': 5
-		},
-		{
-			'nome': 'tree spawn_speed +',
-			'upgrade': 'upgrade_tree_spawn_speed',
-			'water': 2,
-			'wood': 4,
+			'water': 3,
+			'wood': 7,
 			'ore': 0
 		},
 		{
-			'nome': 'tree spawn_speed (lvl 2) ++',
+			'nome': 'Tree Spawn Increase +',
 			'upgrade': 'upgrade_tree_spawn_speed',
-			'water': 4,
-			'wood': 3,
-			'ore': 0
+			'water': 8,
+			'wood': 12,
+			'ore': 4
+		},
+		{
+			'nome': 'Tree Spawn Increase ++',
+			'upgrade': 'upgrade_tree_spawn_speed',
+			'water': 12,
+			'wood': 16,
+			'ore': 12
 		},
 		{
 			'nome': 'Max level Reached',
@@ -155,31 +155,30 @@ func _input(event):
 
 
 func self_show():
-	if _timer >= time_to_press:
-		get_tree().paused = true
-		$"%Upgrade".grab_focus()
-		self.show()
-		_timer = 0
+	get_tree().paused = true
+	$"%Upgrade".grab_focus()
+	self.show()
 
 
 func upgrade_cut_speed() -> void:
 	Globals.cut_speed_multi -= 0.2
-	
 	print("Cut speed upgraded!")
+
 
 func upgrade_tree_spawn_speed() -> void:
 	Globals.spawn_tree_multi -= 0.2
 	print("Tree spawn speed upgraded!")
 
 
-
 func upgrade_well_fill_velocity() -> void:
 	Globals.well_fill_multiplier -= 0.15
 	print("Well fill velocity upgraded!")
 
+
 func upgrade_well_max_water() -> void:
 	Globals.well_max_water += 2
 	print("Well max water capacity increased!")
+
 
 func upgrade_bucket_max_water() -> void:
 	Globals.bucket_max_water += 2
@@ -187,7 +186,7 @@ func upgrade_bucket_max_water() -> void:
 
 
 func upgrade_sword_damage() -> void:
-	Globals.attack_level += 1
+	Globals.damage_multi += 0.15
 	print("Sword damage upgraded!")
 
 
@@ -202,7 +201,7 @@ func upgrade_berzerk_sword() -> void:
 
 
 func upgrade_plant_life() -> void:
-	Globals.plant_max_life += 1
+	Globals.plant_max_life += 30
 	print("Plant life increased!")
 
 
@@ -212,7 +211,7 @@ func upgrade_thornmail() -> void:
 
 
 func upgrade_plant_heal_faster() -> void:
-	Globals.plant_heal_muilti += 0.15
+	Globals.plant_heal_muilti += 0.25
 	print("Plant heal rate increased!")
 
 
@@ -250,7 +249,7 @@ func update() -> void:
 	%WoodLabel.text = str(dir['wood'])
 	%OreLabel.text = str(dir['ore'])
 	%Upgrade.text = dir['nome']
-	%LvlLabel.text = "lvl: " + str(indexes_list[current_index]+1)
+	%LvlLabel.text = "Lvl " + str(indexes_list[current_index]+1)
 	current_upgrade = dir['upgrade']
 
 

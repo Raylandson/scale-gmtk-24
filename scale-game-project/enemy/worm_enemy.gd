@@ -139,6 +139,9 @@ func take_damage(damage : float) -> void:
 
 
 func death():
+	var tw = create_tween()
+	tw.tween_property(self, "scale", Vector2(0,0), 0.25).from(Vector2(1.2, 1.2)).set_trans(Tween.TRANS_QUART)
+	await tw.finished
 	self.queue_free()
 
 

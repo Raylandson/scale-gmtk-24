@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bi8hos746qhnk"]
+[gd_scene load_steps=6 format=3 uid="uid://bi8hos746qhnk"]
 
 [ext_resource type="Texture2D" uid="uid://b7505ocypkei0" path="res://assets/sprites/seed.png" id="1_8rdpw"]
 [ext_resource type="Script" path="res://seed/seed.gd" id="1_sieue"]
-[ext_resource type="PackedScene" uid="uid://c0vhe50r5br4k" path="res://ui/interact_button_ui.tscn" id="3_f6eb0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sw378"]
 radius = 69.0072
@@ -19,6 +18,7 @@ collision_mask = 18
 script = ExtResource("1_sieue")
 
 [node name="CollectArea" type="Area2D" parent="."]
+position = Vector2(0, -1)
 collision_layer = 11
 collision_mask = 11
 
@@ -49,13 +49,13 @@ one_way_collision = true
 position = Vector2(-18, -51)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf2"]
-position = Vector2(-19.75, 0)
+position = Vector2(-17, 1)
 shape = SubResource("RectangleShape2D_gc5pb")
 disabled = true
 one_way_collision = true
 
 [node name="Leaf3" type="StaticBody2D" parent="."]
-position = Vector2(58, -71)
+position = Vector2(52, -68)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf3"]
 position = Vector2(-19.75, 0)
@@ -67,7 +67,7 @@ one_way_collision = true
 position = Vector2(-16, -93)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf4"]
-position = Vector2(-19.75, 0)
+position = Vector2(-20, 4)
 shape = SubResource("RectangleShape2D_gc5pb")
 disabled = true
 one_way_collision = true
@@ -76,13 +76,13 @@ one_way_collision = true
 position = Vector2(60, -117)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf5"]
-position = Vector2(-19.75, 0)
+position = Vector2(-19, 5)
 shape = SubResource("RectangleShape2D_gc5pb")
 disabled = true
 one_way_collision = true
 
 [node name="Leaf6" type="StaticBody2D" parent="."]
-position = Vector2(-17, -137)
+position = Vector2(-17, -126)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf6"]
 position = Vector2(-19.75, 0)
@@ -91,7 +91,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf7" type="StaticBody2D" parent="."]
-position = Vector2(60, -161)
+position = Vector2(60, -150)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf7"]
 position = Vector2(-19.75, 0)
@@ -100,7 +100,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf8" type="StaticBody2D" parent="."]
-position = Vector2(-18, -181)
+position = Vector2(-18, -170)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf8"]
 position = Vector2(-19.75, 0)
@@ -109,7 +109,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf9" type="StaticBody2D" parent="."]
-position = Vector2(56, -207)
+position = Vector2(56, -196)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf9"]
 position = Vector2(-19.75, 0)
@@ -118,7 +118,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf10" type="StaticBody2D" parent="."]
-position = Vector2(-17, -225)
+position = Vector2(-17, -214)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf10"]
 position = Vector2(-19.75, 0)
@@ -127,7 +127,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf11" type="StaticBody2D" parent="."]
-position = Vector2(59, -250)
+position = Vector2(59, -239)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf11"]
 position = Vector2(-19.75, 0)
@@ -136,7 +136,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf12" type="StaticBody2D" parent="."]
-position = Vector2(-18, -268)
+position = Vector2(-18, -257)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf12"]
 position = Vector2(-19.75, 0)
@@ -145,7 +145,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf13" type="StaticBody2D" parent="."]
-position = Vector2(54, -290)
+position = Vector2(54, -279)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf13"]
 position = Vector2(-19.75, 0)
@@ -154,7 +154,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf14" type="StaticBody2D" parent="."]
-position = Vector2(-15, -310)
+position = Vector2(-15, -299)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf14"]
 position = Vector2(-19.75, 0)
@@ -163,7 +163,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf15" type="StaticBody2D" parent="."]
-position = Vector2(58, -335)
+position = Vector2(58, -324)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf15"]
 position = Vector2(-19.75, 0)
@@ -172,22 +172,13 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf16" type="StaticBody2D" parent="."]
-position = Vector2(-16, -354)
+position = Vector2(-16, -343)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf16"]
 position = Vector2(-19.75, 0)
 shape = SubResource("RectangleShape2D_gc5pb")
 disabled = true
 one_way_collision = true
-
-[node name="InteractButtonUi" parent="." instance=ExtResource("3_f6eb0")]
-position = Vector2(1, 34)
-show_text = "Drop
- Items"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractButtonUi"]
-position = Vector2(1, -33)
-shape = SubResource("CircleShape2D_sw378")
 
 [connection signal="body_entered" from="CollectArea" to="." method="_on_collect_area_body_entered"]
 [connection signal="body_exited" from="CollectArea" to="." method="_on_collect_area_body_exited"]

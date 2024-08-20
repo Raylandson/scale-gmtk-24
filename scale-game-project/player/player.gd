@@ -87,6 +87,8 @@ var wood_carrying: bool = false
 var is_attacking: = false
 var first_pick: bool = true #olha oq vc me faz fazer
 
+var timer_tomenu = 0.35
+var _timer = 0
 
 func _process(delta: float) -> void:
 	bucket_follow()
@@ -104,9 +106,11 @@ func _ready():
 func _physics_process(delta):
 	_direction = get_direction()
 	manage_animations()
-	if inside_upgrade_area and Input.is_action_just_pressed("x"):
-		Globals.emit_signal("show_upgrades")
 	
+	_timer += delta
+	if inside_upgrade_area and Input.is_action_just_pressed("x") and _timer >= timer_tomenu:
+		Globals.emit_signal("show_upgrades")
+		_timer = 0
 	#printt(velocity, _g_multiplier, _ground_accel)s
 	#print(Globals.speed_multi)
 	match _actual_state:
