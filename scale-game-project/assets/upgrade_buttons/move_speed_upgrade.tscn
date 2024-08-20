@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2jtpkkihox8d"]
+
+[ext_resource type="Script" path="res://assets/upgrade_buttons/move_speed_upgrade.gd" id="1_5aysh"]
+
+[node name="MoveSpeedUpgrade" type="Button"]
+text = "Increase 
+Move Speed"
+script = ExtResource("1_5aysh")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

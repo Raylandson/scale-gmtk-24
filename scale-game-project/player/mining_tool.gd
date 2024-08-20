@@ -22,7 +22,7 @@ func mine_cell(cell_id: int, cell_position:Vector2i) -> void:
 
 
 func generate_ore(ore_pos: Vector2) -> void:
-	for a in range(5):
+	for a in range(2):
 		var ore_instance: CollectableItem = ore.instantiate()
 		ore_instance.global_position = ore_pos
 		get_tree().current_scene.add_child(ore_instance)

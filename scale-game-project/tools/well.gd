@@ -18,7 +18,7 @@ func _process(delta: float) -> void:
 				_player.inside_well = false
 			water_quantity = _player._bucket.catch_water(water_quantity)
 			_player.change_velocity_multiplier()
-			printt(water_quantity)
+			#printt(water_quantity)
 
 
 

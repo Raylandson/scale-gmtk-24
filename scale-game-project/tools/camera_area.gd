@@ -15,7 +15,7 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if is_first_room and body.is_in_group("CameraChanger"):
 		is_first_room = false
-		print(self.name)
+		#print(self.name)
 		return
 	
 	if body.is_in_group("CameraChanger"):

@@ -39,7 +39,7 @@ func _physics_process(delta):
 	
 	match current_state:
 		States.CRAWLING:
-			print('crawling in my skin')
+			#print('crawling in my skin')
 			gravity_scale = 0
 			if is_instance_valid(target):
 				direction = global_position.direction_to(floor_pos)
@@ -91,10 +91,10 @@ func take_damage(damage : float) -> void:
 	current_health_points = max(0, current_health_points - damage)
 	if current_health_points <= 0:
 		death()
-	apply_knockback()
+	#apply_knockback()
 	
 	var tw = create_tween()
-	tw.tween_property(self, "modulate", Color(1, 1, 1), 0.15).from(Color.DARK_RED).set_trans(Tween.TRANS_QUART)
+	tw.tween_property(self, "modulate", Color(1, 1, 1), 0.25).from(Color.DARK_RED).set_trans(Tween.TRANS_QUART)
 
 
 func death():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cewtcn5mp3p3b"]
+[gd_scene load_steps=13 format=3 uid="uid://cewtcn5mp3p3b"]
 
 [ext_resource type="Script" path="res://ui/upgrade_menu.gd" id="1_xca64"]
 [ext_resource type="Texture2D" uid="uid://dgn32eh1ko8qw" path="res://assets/sprites/left_arrow.png" id="2_mtgm0"]
@@ -8,6 +8,10 @@
 [ext_resource type="Theme" uid="uid://bbot8f347duf0" path="res://assets/resources/font_theme.tres" id="5_psyno"]
 [ext_resource type="Texture2D" uid="uid://j217o4fahfko" path="res://assets/sprites/wood_icon.png" id="6_qmeho"]
 [ext_resource type="Texture2D" uid="uid://vquoxdnpnw7j" path="res://assets/sprites/ore_icon.png" id="7_g65px"]
+[ext_resource type="Texture2D" uid="uid://da11bqf68dx36" path="res://assets/sprites/block1.png" id="9_inoid"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ogxre"]
+bg_color = Color(0, 0, 0, 0.494118)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ligfl"]
 texture = ExtResource("3_hls1n")
@@ -26,115 +30,206 @@ texture_margin_bottom = 4.0
 [node name="UpgradeMenu" type="CanvasLayer"]
 script = ExtResource("1_xca64")
 
-[node name="Upgrade" type="MarginContainer" parent="."]
-offset_left = 173.0
-offset_top = 25.0
-offset_right = 394.0
-offset_bottom = 106.0
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ogxre")
+
+[node name="MarginContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Upgrade" type="MarginContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(270, 90)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -137.5
+offset_top = -38.5
+offset_right = 138.5
+offset_bottom = 47.5
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = -1
 theme_override_constants/margin_top = 0
 theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 0
 
-[node name="Panel" type="Panel" parent="Upgrade"]
+[node name="Panel" type="Panel" parent="MarginContainer/Upgrade"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ligfl")
 
-[node name="MarginContainer" type="MarginContainer" parent="Upgrade"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/Upgrade"]
 layout_mode = 2
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 15
 theme_override_constants/margin_bottom = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Upgrade/MarginContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/Upgrade/MarginContainer"]
 layout_mode = 2
 
-[node name="TextureButton2" type="TextureButton" parent="Upgrade/MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Upgrade/MarginContainer/CenterContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture_normal = ExtResource("2_mtgm0")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Upgrade/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
 theme = ExtResource("5_psyno")
-text = "
-  + Player Mining 
-        Speed "
-scroll_active = false
+theme_override_constants/separation = 27
 
-[node name="TextureButton" type="TextureButton" parent="Upgrade/MarginContainer/HBoxContainer"]
+[node name="Back" type="Button" parent="MarginContainer/Upgrade/MarginContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
-texture_normal = ExtResource("4_51xbp")
+theme = ExtResource("5_psyno")
+icon = ExtResource("2_mtgm0")
 
-[node name="ResourceCount" type="MarginContainer" parent="."]
-offset_left = 160.0
-offset_top = 94.0
-offset_right = 283.0
-offset_bottom = 116.0
+[node name="Upgrade" type="Button" parent="MarginContainer/Upgrade/MarginContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+text = "Increase Move
+Speed"
 
-[node name="Panel" type="Panel" parent="ResourceCount"]
+[node name="Next" type="Button" parent="MarginContainer/Upgrade/MarginContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+icon = ExtResource("4_51xbp")
+
+[node name="LevelUpUi" type="MarginContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.774
+anchor_top = 0.241
+anchor_right = 0.774
+anchor_bottom = 0.241
+offset_left = -86.824
+offset_top = 5.91599
+offset_right = -26.824
+offset_bottom = 26.916
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="Panel" type="Panel" parent="MarginContainer/LevelUpUi"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/LevelUpUi"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 14
+
+[node name="LvlLabel" type="Label" parent="MarginContainer/LevelUpUi/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Lvl: 1"
+horizontal_alignment = 1
+
+[node name="ResourceCount" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -62.0
+offset_top = -127.0
+offset_right = 62.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="Panel" type="Panel" parent="MarginContainer/ResourceCount"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_o2cgh")
 
-[node name="MarginContainer" type="MarginContainer" parent="ResourceCount/Panel"]
-layout_mode = 1
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/ResourceCount"]
+custom_minimum_size = Vector2(124, 22)
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/ResourceCount/MarginContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_0fe4j")
+
+[node name="WaterLabel" type="Label" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_psyno")
+text = "1"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_qmeho")
+
+[node name="WoodLabel" type="Label" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_psyno")
+text = "1"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TextureRect2" type="TextureRect" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("7_g65px")
+
+[node name="OreLabel" type="Label" parent="MarginContainer/ResourceCount/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("5_psyno")
+text = "1"
+
+[node name="Control" type="Control" parent="."]
+visible = false
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 0
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 0
 
-[node name="CenterContainer" type="CenterContainer" parent="ResourceCount/Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ResourceCount/Panel/MarginContainer/CenterContainer"]
-layout_mode = 2
-theme_override_constants/separation = 8
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="TextureRect2" type="TextureRect" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("3_0fe4j")
-
-[node name="Label" type="Label" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme = ExtResource("5_psyno")
-text = "1"
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="TextureRect2" type="TextureRect" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer2"]
-layout_mode = 2
-texture = ExtResource("6_qmeho")
-
-[node name="Label" type="Label" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer2"]
-layout_mode = 2
-theme = ExtResource("5_psyno")
-text = "1"
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 0
-
-[node name="TextureRect2" type="TextureRect" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer3"]
-layout_mode = 2
-texture = ExtResource("7_g65px")
-
-[node name="Label" type="Label" parent="ResourceCount/Panel/MarginContainer/CenterContainer/HBoxContainer/HBoxContainer3"]
-layout_mode = 2
-theme = ExtResource("5_psyno")
-text = "1"
+[node name="ItemList" type="ItemList" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -319.0
+grow_horizontal = 2
+grow_vertical = 2
+item_count = 3
+same_column_width = true
+fixed_column_width = 6
+item_0/text = "Swifter Boots"
+item_0/icon = ExtResource("9_inoid")
+item_1/text = "Cloyud"
+item_1/icon = ExtResource("9_inoid")
+item_2/text = "Increse move speedao"
+item_2/icon = ExtResource("9_inoid")

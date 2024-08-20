@@ -8,10 +8,8 @@ STATE_CARRYING, STATE_CUTTING}
 
 const TILE_SIZE = 16
 
+const SWORD_LVL_1 = preload("res://attacks/sword_lvl_1.tscn")
 @export var tile_map: TileMapLayer
-
-@export var horizontal_attack_damage = 10
-@export var vertical_attack_damage = 15
 
 @export var ground_max_velocity: float = 7.0 * TILE_SIZE
 @export_range (0.01, 2.0) var ground_turn_time: float = 0.15
@@ -38,6 +36,8 @@ var flip_time: float = 0.1
 var default_stuned := stuned_time
 
 var active = true 
+
+@onready var state_machine = $AnimationTree["parameters/playback"]
 
 @onready var _default_gravity: float = 2 * jump_size / (pow(fall_time, 2)/2) 
 @onready var _gravity_multiplier: float = jump_size/min_jump_size
@@ -67,7 +67,7 @@ var _inside_ladder = false
 var _ladder
 var _bucket : Bucket
 var _cut_tree: CutTree
-var carrying_velocity_multiplier: float = 1
+var carrying_velocity_multiplier: float = 0.6
 var default_carrying_multiplier: float = 0.5
 var carrying: bool = false
 var inside_well: bool = false
@@ -151,7 +151,6 @@ func bucket_follow() -> void:
 
 
 func carrying_state(delta: float) -> void:
-	
 	pass
 
 
@@ -167,6 +166,8 @@ func cutting_state(delta: float) -> void:
 		cutting_state_exit()
 	
 	cut_time -= delta
+	
+	state_machine.travel("tree")
 	
 	if cut_time < 0:
 		if is_instance_valid(_cut_tree):
@@ -190,7 +191,7 @@ func friction(frict: float, delta: float):
 
 func stand_state(delta: float) -> void:
 	flip_nodes()
-	
+	state_machine.travel("idle")
 	friction(_ground_fric, delta)
 	
 	#velocity.x = clamp(velocity.x, -ground_max_velocity, ground_max_velocity)
@@ -201,10 +202,7 @@ func stand_state(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump()
 	
-	if Input.is_action_pressed("ui_accept"):
-		if Input.is_action_pressed("ui_up"):
-			vertical_attack()
-		else:
+	if Input.is_action_just_pressed("ui_accept"):
 			horizontal_attack()
 	
 	if not is_on_floor():
@@ -214,6 +212,7 @@ func stand_state(delta: float) -> void:
 func move_state(delta: float) -> void:
 	flip_nodes()
 	#SPEED MULTIPLIER BRONCA BRONCA ALARME
+	state_machine.travel("walk")
 	movement(_ground_accel, _ground_turn_accel, ground_max_velocity * Globals.speed_multi, delta)
 		
 	if _direction == 0.0:
@@ -226,20 +225,20 @@ func move_state(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		jump()
+		state_machine.travel("jump")
 	
 	if not is_on_floor():
 		_actual_state = STATE_AIR
 	
-	if Input.is_action_pressed("ui_accept"):
-		if Input.is_action_pressed("ui_up"):
-			vertical_attack()
-		else:
+	if Input.is_action_just_pressed("ui_accept"):
 			horizontal_attack()
 
 func air_state(delta: float) -> void:
 	flip_nodes()
 	movement(_air_accel, _air_turn_accel, air_max_velocity, delta)
 	calculate_fall_distance()
+	
+	state_machine.travel("jump")
 	
 	if _direction == 0.0:
 		friction(_air_fric, delta)
@@ -258,10 +257,7 @@ func air_state(delta: float) -> void:
 	
 	coyote_time -= delta
 	
-	if Input.is_action_pressed("ui_accept"):
-		if Input.is_action_pressed("ui_up"):
-			vertical_attack()
-		else:
+	if Input.is_action_just_pressed("ui_accept"):
 			horizontal_attack()
 	
 	if _jump_pressed:
@@ -368,31 +364,19 @@ func movement(accel:float, turn_accel:float, max_velocity:float, delta:float) ->
 func manage_animations():
 	pass
 
+
 func flip_nodes() -> void:
 	if _direction:
-		$Flip.scale.x = -_direction
-
-
-func _on_horizontal_attack_body_entered(body: Node2D) -> void:
-	if body.is_in_group("enemy"):
-		body.take_damage(horizontal_attack_damage * Globals.damage_multi)
-
-
-#func _on_vertical_attack_body_entered(body: Area2D) -> void:
-	#if body.is_in_group("enemy"):
-		#body.take_damage(vertical_attack_damage)
+		$Flip.scale.x = _direction
 
 
 func horizontal_attack():
-	if is_attacking == false:
+	if is_attacking == false and not carrying:
 		is_attacking = true
-		$AnimationPlayer.play("horizontal_attack")
-		await get_tree().create_timer(0.6)
-		is_attacking = false
+		var sw = SWORD_LVL_1.instantiate()
+		$Flip/AtkPivot.add_child(sw)
+		sw.ended.connect(set_can_attacking)
 		
-func vertical_attack():
-	if is_attacking == false:
-		is_attacking = true
-		$AnimationPlayer.play("vertical_attack")
-		await get_tree().create_timer(0.6)
-		is_attacking = false
+func set_can_attacking():
+	
+	is_attacking = false

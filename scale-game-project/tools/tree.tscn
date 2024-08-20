@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://bkda8mouc26ie"]
 
 [ext_resource type="Script" path="res://tools/tree.gd" id="1_haqbx"]
-[ext_resource type="PackedScene" uid="uid://bvgrp8c2m7ffg" path="res://tools/ore.tscn" id="2_yxct5"]
+[ext_resource type="PackedScene" uid="uid://ceha2iavrxbq2" path="res://tools/log.tscn" id="2_l782i"]
 [ext_resource type="Texture2D" uid="uid://7uv80efdwdfw" path="res://assets/sprites/tree0.png" id="3_wgpx7"]
 [ext_resource type="Texture2D" uid="uid://d10wsp6xq0t6e" path="res://assets/sprites/tree1.png" id="4_l8k3u"]
 [ext_resource type="PackedScene" uid="uid://c0vhe50r5br4k" path="res://ui/interact_button_ui.tscn" id="4_la5lb"]
@@ -197,7 +197,7 @@ z_index = -5
 collision_layer = 4
 collision_mask = 16
 script = ExtResource("1_haqbx")
-log_scene = ExtResource("2_yxct5")
+log_scene = ExtResource("2_l782i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, -39)

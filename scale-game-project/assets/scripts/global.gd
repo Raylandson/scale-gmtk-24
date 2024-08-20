@@ -15,8 +15,8 @@ var speed_multi = 1
 var mining_speed_multi = 1
 var chop_speed_multi = 1
 var damage_multi = 1
-var carry_count = 3
-
+var carry_count = 1
+var attack_level = 1
 
 func update_vars():
 	wood = dict_vars["wood"]

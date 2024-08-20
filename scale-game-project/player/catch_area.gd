@@ -28,10 +28,10 @@ func _process(delta: float) -> void:
 	
 	
 	
-	if timer < 0:
-		printt(player.carrying, player.wood_carrying, current_itens.size(), 
-		items_list.is_empty(), current_itens, items_list)
-		timer = 0.5
+	#if timer < 0:
+		##printt(player.carrying, player.wood_carrying, current_itens.size(), 
+		#tems_list.is_empty(), current_itens, items_list)
+		#timer = 0.5
 	
 	can_catch_timer -= delta
 	
@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 				item.apply_central_force(player.velocity * Vector2(100, 70) + \
 				base_vector * randf_range(1, 5)) # esse numero magico eh psico
 			current_itens.erase(item)
-			print('item deletado', item.name)
+			#print('item deletado', item.name)
 		
 		#tem que ter esse return
 		return
@@ -67,7 +67,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_accept") and not player.carrying \
 		and (not player.wood_carrying or current_itens.size() < max_carrying_items) \
 		and not items_list.is_empty() and not player.inside_upgrade_area:
-		print('catching wood')
+		#print('catching wood')
 		
 		var items_copy: Array = items_list.duplicate() 
 		
