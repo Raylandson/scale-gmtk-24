@@ -79,6 +79,10 @@ target_position = Vector2(9.84138, 0.0107565)
 collision_mask = 16
 hit_from_inside = true
 
+[node name="Marker2D" type="Marker2D" parent="Flip"]
+unique_name_in_owner = true
+position = Vector2(27, -14)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_qxmd6")

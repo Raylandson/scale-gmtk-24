@@ -81,8 +81,6 @@ monitorable = false
 [node name="EnemyGenerator" parent="." node_paths=PackedStringArray("floor_height") instance=ExtResource("2_3xqak")]
 min_spawn_distance = 800.0
 max_spawn_distance = 100.0
-min_time_spawn = 10.0
-max_time_spawn = 15.0
 floor_height = NodePath("../InitialPos")
 
 [node name="InitialPos" type="Marker2D" parent="."]

@@ -6,9 +6,9 @@ var current_state = States.CRAWLING
 
 
 @export var speed = 8
-@export var gravity = 50
+@export var gravity = 222
 @export var attack_distance_threshold = 50
-
+@export var jump_height: float = 46
 @export var health_points = 50
 @onready var current_health_points = health_points
 var jump_force = 0
@@ -17,7 +17,8 @@ var direction = Vector2.ZERO
 var target: Node2D = null
 var tile_map: TileMapLayer = null
 var gravity_scale: float = 1
-
+@onready var jump_speed = sqrt(2 * gravity * jump_height)
+var jumped = false
 
 func _ready():
 	target = get_tree().get_first_node_in_group("seed")
@@ -32,7 +33,6 @@ func _ready():
 
 func _physics_process(delta):
 	
-	velocity.y += gravity * gravity_scale + jump_force
 	
 	
 	#aqui programa ta, e muito
@@ -79,12 +79,23 @@ func _physics_process(delta):
 					direction = Vector2.ZERO
 					current_state = States.ATTACKING
 			
-			if $Flip/RayCast2D.is_colliding():
-				jump_force = -100
-			else:
-				jump_force = 0
+			#paia isso aqui, olha como se programa de verdade
+			#if $Flip/RayCast2D.is_colliding():
+				#jump_force = -100
+			#else:
+				#jump_force = 0
+			if is_instance_valid(tile_map):
+				var cell_id: = tile_map.get_cell_source_id(
+					tile_map.local_to_map(%Marker2D.global_position))
+				print(cell_id)
+				if cell_id != -1 and not jumped:
+					jumped = true
+					self.velocity.y = -jump_speed
 			
-			velocity.x = speed * direction.x + jump_force/2
+			if self.is_on_floor():
+				jumped = false
+				
+			velocity.x = speed * direction.x
 		
 		States.ATTACKING:
 			#ataque
@@ -106,6 +117,7 @@ func _physics_process(delta):
 		else:
 			$Seed.rotation_degrees = 0
 		
+	velocity.y += gravity * gravity_scale * delta
 	move_and_slide()
 	
 	if sign(direction.x): $Flip.scale.x = sign(direction.x)

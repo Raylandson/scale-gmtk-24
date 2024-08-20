@@ -9,8 +9,8 @@ STATE_CARRYING, STATE_CUTTING}
 const TILE_SIZE = 16
 
 const SWORD_LVL_1 = preload("res://attacks/sword_lvl_1.tscn")
-const SWORD_LVL_2 = preload("res://attacks/sword_lvl_1.tscn")
-const SWORD_BERZEK = preload("res://attacks/sword_lvl_1.tscn")
+const SWORD_LVL_2 = preload("res://attacks/sword_lvl_2.tscn")
+const SWORD_BERZEK = preload("res://attacks/sword_lvl3.tscn")
 var current_sword = SWORD_LVL_1
 
 @export var tile_map: TileMapLayer
