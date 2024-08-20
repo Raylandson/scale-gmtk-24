@@ -9,10 +9,9 @@ signal upgrade_slow_area
 signal call_shake
 signal show_upgrades
 
-var wood : int = 99
-var water : int = 99
-
-var ore : int = 99
+var wood : int = 0
+var water : int = 0
+var ore : int = 0
 
 var dict_vars: Dictionary = {
 	"wood" : wood,
@@ -33,7 +32,7 @@ var well_max_water: int = 3
 var well_fill_multiplier: float = 1.0
 var bucket_max_water: int = 2
 
-var spawn_tree_time: float = 12.0
+var spawn_tree_time: float = 50.0
 var spawn_tree_multi: float = 1.0
 var cut_speed_multi:float = 1.0
 

@@ -69,6 +69,21 @@ sources/4 = SubResource("TileSetAtlasSource_1mtvu")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x5omx"]
 size = Vector2(208, 108)
 
+[sub_resource type="Animation" id="Animation_nhv3r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_o5j8k"]
 resource_name = "fade"
 length = 0.857
@@ -83,21 +98,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.63728, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_nhv3r"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1mijv"]
@@ -123,10 +123,10 @@ collision_mask = 4
 monitorable = false
 
 [node name="EnemyGenerator" parent="." node_paths=PackedStringArray("floor_height") instance=ExtResource("2_3xqak")]
-min_spawn_distance = 800.0
-max_spawn_distance = 100.0
-min_time_spawn = 15.0
-max_time_spawn = 25.0
+min_spawn_distance = 1700.0
+max_spawn_distance = 2000.0
+min_time_spawn = 25.0
+max_time_spawn = 35.0
 floor_height = NodePath("../InitialPos")
 fly_worm = ExtResource("6_gl7k0")
 
@@ -212,7 +212,7 @@ texture_progress = ExtResource("14_ghmdr")
 script = ExtResource("15_rixkq")
 seed = NodePath("../../../Seed")
 
-[node name="heathbar" type="TextureProgressBar" parent="SeedLevelUp/Control"]
+[node name="heathbar" type="TextureProgressBar" parent="SeedLevelUp/Control" node_paths=PackedStringArray("seed")]
 layout_mode = 0
 offset_left = 217.0
 offset_top = 283.0
@@ -227,6 +227,7 @@ stretch_margin_bottom = 3
 texture_under = ExtResource("13_knuot")
 texture_progress = ExtResource("16_pbsk5")
 script = ExtResource("17_nwr71")
+seed = NodePath("../../../Seed")
 
 [node name="Label" type="Label" parent="SeedLevelUp/Control"]
 layout_mode = 0

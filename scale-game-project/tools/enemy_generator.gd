@@ -45,12 +45,12 @@ func spawn_enemy(enemy_scene: PackedScene, y_height:float):
 
 
 func _on_difficult_timer_timeout() -> void:
-	min_time_spawn = max(min_time_spawn * 0.8, 4)
-	max_time_spawn = max(max_time_spawn * 0.8, 7)
+	min_time_spawn = max(min_time_spawn * 0.8, 7)
+	max_time_spawn = max(max_time_spawn * 0.8, 10)
 	
-	min_enemy_wave = max(min_enemy_wave + 1, 10)
-	max_enemy_wave = max(max_enemy_wave + 1, 15)
+	#min_enemy_wave = max(min_enemy_wave + 1, 10)
+	#max_enemy_wave = max(max_enemy_wave + 1, 15)
 	
-	min_spawn_distance = max(min_spawn_distance * 0.8, 600)
-	max_spawn_distance = max(max_spawn_distance * 0.8, 800)
+	min_spawn_distance = max(min_spawn_distance * 0.8, 1000)
+	max_spawn_distance = max(max_spawn_distance * 0.8, 1200)
 	

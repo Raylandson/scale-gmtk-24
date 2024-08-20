@@ -4,7 +4,7 @@ extends Area2D
 
 var _player: Actor
 var _player_inside: bool = false
-@export var time_to_fill_water: float = 5.0
+@export var time_to_fill_water: float = 20.0
 
 
 func _process(delta: float) -> void:

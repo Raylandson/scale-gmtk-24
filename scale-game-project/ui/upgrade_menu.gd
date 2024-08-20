@@ -224,8 +224,8 @@ func apply_upgrade() -> void:
 	
 	if has_method(current_upgrade):
 		var dir = upgrades[current_index][indexes_list[current_index]]
-		if Globals.ore >= dir['ore'] and Globals.water >= dir['water'] and\
-		Globals.wood >= dir['wood']:
+		if Globals.dict_vars['ore'] >= dir['ore'] and Globals.dict_vars['water'] >= dir['water'] and\
+		Globals.dict_vars['wood'] >= dir['wood']:
 			Globals.dict_vars['ore'] -= dir['ore']
 			Globals.dict_vars['water'] -= dir['water']
 			Globals.dict_vars['wood'] -= dir['wood']
