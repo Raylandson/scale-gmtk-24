@@ -144,6 +144,7 @@ func _physics_process(delta):
 var damage_dir = 1
 
 func grab(bucket: Bucket) -> void:
+	%Catch.play()
 	_bucket = bucket
 	carrying = true
 	first_pick = true
@@ -157,6 +158,7 @@ func change_velocity_multiplier() -> void:
 
 #top 3 nomes
 func disgrab() -> void:
+	%Catch.play()
 	carrying = false
 	carrying_velocity_multiplier = 1
 
@@ -377,6 +379,7 @@ func get_direction() -> float:
 
 func jump() -> void:
 #	inside if active
+	%AudioStreamPlayer2D.play()
 	velocity.y = -jump_force
 	_was_jumped = true
 
@@ -420,6 +423,7 @@ func horizontal_attack() -> void:
 
 
 func atack() -> void:
+	%Sword.play()
 	is_attacking = true
 	var sw = current_sword.instantiate()
 	$Flip/AtkPivot.add_child(sw)
