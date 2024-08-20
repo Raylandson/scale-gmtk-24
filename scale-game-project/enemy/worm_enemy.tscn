@@ -3,9 +3,6 @@
 [ext_resource type="Script" path="res://enemy/worm_enemy.gd" id="1_83hfe"]
 [ext_resource type="Texture2D" uid="uid://cc1kia8x275i1" path="res://assets/sprites/worm.png" id="2_6hx4w"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbpjr"]
-size = Vector2(23.25, 36.875)
-
 [sub_resource type="Animation" id="Animation_rrdeh"]
 length = 0.001
 tracks/0/type = "value"
@@ -62,10 +59,31 @@ _data = {
 "movingR": SubResource("Animation_6ni8x")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xaorm"]
+height = 35.778
+
 [node name="WormEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 2
 collision_mask = 16
 script = ExtResource("1_83hfe")
+speed = 5
+gravity = 35
+
+[node name="Flip" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Flip"]
+position = Vector2(17.3644, -11.7533)
+rotation = -0.00603772
+exclude_parent = false
+target_position = Vector2(9.84138, 0.0107565)
+collision_mask = 16
+hit_from_inside = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qxmd6")
+}
+autoplay = "movingR"
 
 [node name="Seed" type="Sprite2D" parent="."]
 position = Vector2(0, -11)
@@ -73,12 +91,6 @@ texture = ExtResource("2_6hx4w")
 hframes = 6
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.437499, -11)
+position = Vector2(0.614278, -9.427)
 rotation = 1.5708
-shape = SubResource("RectangleShape2D_pbpjr")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_qxmd6")
-}
-autoplay = "movingR"
+shape = SubResource("CapsuleShape2D_xaorm")

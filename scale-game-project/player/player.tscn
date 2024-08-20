@@ -210,14 +210,14 @@ texture = ExtResource("2_201af")
 hframes = 9
 
 [node name="MiningPos" type="Marker2D" parent="Flip" node_paths=PackedStringArray("player")]
-position = Vector2(4, 22)
+position = Vector2(3, 22)
 script = ExtResource("3_6yb8d")
 player = NodePath("../..")
 ore = ExtResource("4_b6e1s")
 
 [node name="BucketPos" type="Marker2D" parent="Flip"]
 unique_name_in_owner = true
-position = Vector2(8, 3)
+position = Vector2(11, 2)
 
 [node name="AtkPivot" type="Node2D" parent="Flip"]
 position = Vector2(8, 3)

@@ -1,20 +1,33 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpbjwgxr7f1t3"]
+[gd_scene load_steps=5 format=3 uid="uid://cpbjwgxr7f1t3"]
 
 [ext_resource type="Script" path="res://tools/well.gd" id="1_s6ewa"]
-[ext_resource type="Texture2D" uid="uid://bn7jyvcvb1lr6" path="res://icon.svg" id="2_ns7p0"]
+[ext_resource type="Texture2D" uid="uid://dvsx0dtm5u7ft" path="res://assets/sprites/well.png" id="2_g5ff5"]
+[ext_resource type="PackedScene" uid="uid://c0vhe50r5br4k" path="res://ui/interact_button_ui.tscn" id="3_kvjtt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_76vlh"]
-radius = 45.0
-height = 150.0
+radius = 30.0
+height = 60.0
 
 [node name="Well" type="Area2D"]
+z_index = -10
 script = ExtResource("1_s6ewa")
+water_quantity = 12
 
 [node name="Icon" type="Sprite2D" parent="."]
-scale = Vector2(0.71875, 1)
-texture = ExtResource("2_ns7p0")
+position = Vector2(-1, -20)
+texture = ExtResource("2_g5ff5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -20)
+shape = SubResource("CapsuleShape2D_76vlh")
+
+[node name="InteractButtonUi" parent="." instance=ExtResource("3_kvjtt")]
+position = Vector2(12, -54)
+show_text = "To Fill
+Bucket"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InteractButtonUi"]
+position = Vector2(-12, 34)
 shape = SubResource("CapsuleShape2D_76vlh")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

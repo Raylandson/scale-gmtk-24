@@ -1,10 +1,10 @@
 [gd_scene load_steps=5 format=3 uid="uid://84fc07qg4qwn"]
 
-[ext_resource type="Texture2D" uid="uid://bn7jyvcvb1lr6" path="res://icon.svg" id="1_w5pqt"]
 [ext_resource type="Script" path="res://tools/bucket.gd" id="1_wfayw"]
+[ext_resource type="Texture2D" uid="uid://drhoo8tdfh7nq" path="res://assets/sprites/bucket.png" id="2_47w7v"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkp7u"]
-radius = 25.0
+radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b4pog"]
 radius = 8.0
@@ -23,8 +23,9 @@ shape = SubResource("CircleShape2D_xkp7u")
 shape = SubResource("CircleShape2D_b4pog")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.09375, 0.109375)
-texture = ExtResource("1_w5pqt")
+texture = ExtResource("2_47w7v")
+hframes = 2
+frame = 1
 
 [connection signal="body_entered" from="GrabArea" to="." method="_on_body_entered"]
 [connection signal="body_exited" from="GrabArea" to="." method="_on_body_exited"]

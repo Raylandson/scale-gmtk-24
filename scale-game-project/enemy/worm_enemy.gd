@@ -9,13 +9,13 @@ var current_state = States.CRAWLING
 
 @export var health_points = 50
 @onready var current_health_points = health_points
-@export var surface_time = 0.5
-
+var jump_force = 0
 var floor_pos: Vector2  = Vector2.ZERO
 var direction = Vector2.ZERO 
 var target: Node2D = null
 var tile_map: TileMapLayer = null
 var gravity_scale: float = 1
+
 
 func _ready():
 	target = get_tree().get_first_node_in_group("seed")
@@ -30,7 +30,8 @@ func _ready():
 
 func _physics_process(delta):
 	
-	velocity.y += gravity * gravity_scale
+	velocity.y += gravity * gravity_scale + jump_force
+	
 	
 	#aqui programa ta, e muito
 	#if not is_instance_valid(target):
@@ -41,10 +42,11 @@ func _physics_process(delta):
 		States.CRAWLING:
 			#print('crawling in my skin')
 			gravity_scale = 0
+			self.modulate.a = 0.5
 			if is_instance_valid(target):
 				direction = global_position.direction_to(floor_pos)
 			
-			velocity = direction * speed * 3
+			velocity.y = direction.y * speed * 2
 			
 			
 			if is_instance_valid(tile_map):
@@ -52,19 +54,21 @@ func _physics_process(delta):
 					tile_map.local_to_map(self.global_position))
 				
 				if cell_id == -1:
-					
 					gravity_scale = 1
-					current_state = States.MOVING
+					jump_force = -100
 					$CollisionShape2D.disabled = false
+					current_state = States.MOVING
 		
 		
 		States.IDLE:
+			self.modulate.a = 1
 			direction = Vector2.ZERO
 			
 			if is_instance_valid(target) and self.global_position.distance_to(target.global_position) < attack_distance_threshold:
 				current_state = States.ATTACKING
 				
 		States.MOVING:
+			self.modulate.a = 1
 			if is_instance_valid(target):
 				var distance_to_target: float = self.global_position.distance_to(target.global_position) 
 				direction = self.global_position.direction_to(target.global_position).normalized()
@@ -73,19 +77,37 @@ func _physics_process(delta):
 					direction = Vector2.ZERO
 					current_state = States.ATTACKING
 			
-			velocity.x = speed * direction.x
+			if $Flip/RayCast2D.is_colliding():
+				jump_force = -100
+			else:
+				jump_force = 0
+			
+			velocity.x = speed * direction.x + jump_force/2
 		
 		States.ATTACKING:
 			#ataque
 			direction = Vector2.ZERO
 			velocity.x = speed * direction.x
 		
+		
 	if sign(direction.x) == -1:
 		$AnimationPlayer.play("movingR")
+		if current_state == States.CRAWLING:
+			$Seed.rotation_degrees = 90
+		else:
+			$Seed.rotation_degrees = 0
+			
 	elif sign(direction.x) == 1:
 		$AnimationPlayer.play("movingL")
+		if current_state == States.CRAWLING:
+			$Seed.rotation_degrees = -90
+		else:
+			$Seed.rotation_degrees = 0
+		
 	move_and_slide()
-
+	
+	if sign(direction.x): $Flip.scale.x = sign(direction.x)
+	
 
 func take_damage(damage : float) -> void:
 	current_health_points = max(0, current_health_points - damage)

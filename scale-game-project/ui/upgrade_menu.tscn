@@ -92,8 +92,7 @@ icon = ExtResource("2_mtgm0")
 
 [node name="Upgrade" type="Button" parent="MarginContainer/Upgrade/MarginContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
-text = "Increase Move
-Speed"
+text = "Sword"
 
 [node name="Next" type="Button" parent="MarginContainer/Upgrade/MarginContainer/CenterContainer/HBoxContainer"]
 layout_mode = 2
