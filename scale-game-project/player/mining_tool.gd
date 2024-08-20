@@ -11,16 +11,18 @@ func _process(delta: float) -> void:
 		var cell_id: = tile_map.get_cell_source_id(cell_position)
 		mine_cell(cell_id, cell_position)
 		
+		
 
 
 func mine_cell(cell_id: int, cell_position:Vector2i) -> void:
 	if cell_id != 0:
 		return
 	
+	%Break.play()
 	get_tree().create_timer(1.5).timeout.connect(func():
 		tile_map.set_cell(cell_position + Vector2i(0, 1), 3, Vector2.ZERO))
 	
-	get_tree().create_timer(1).timeout.connect(func():
+	get_tree().create_timer(5).timeout.connect(func():
 		for item in tile_map.get_used_cells_by_id(3):
 			var rand_num = randf()
 			var top_left = tile_map.get_cell_source_id(item + Vector2i(-1, -1)) != -1

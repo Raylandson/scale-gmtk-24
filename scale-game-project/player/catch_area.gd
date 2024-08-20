@@ -48,7 +48,7 @@ func _process(delta: float) -> void:
 		and not current_itens.is_empty():
 
 		var items_copy: Array = current_itens.duplicate()
-		
+		%Catch.play()
 		for item in items_copy:
 			if not is_instance_valid(item):
 				current_itens.erase(item)
@@ -74,6 +74,7 @@ func _process(delta: float) -> void:
 		and not player.enemy_area.has_overlapping_bodies():
 		#print('catching wood')
 		
+		%Catch.play()
 		var items_copy: Array = items_list.duplicate() 
 		
 		for item in items_copy:

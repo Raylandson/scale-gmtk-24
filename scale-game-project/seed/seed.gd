@@ -37,6 +37,7 @@ func _process(delta: float) -> void:
 func take_damage(num: float) -> void:
 	current_life -= num
 	if current_life <= 0:
+		get_tree().reload_current_scene()
 		print('its over, brutal')
 
 

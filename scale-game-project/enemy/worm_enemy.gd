@@ -104,10 +104,13 @@ func _physics_process(delta):
 		
 		States.ATTACKING:
 			#ataque
+			time_to_atack -= delta
+			if is_instance_valid(target) and time_to_atack < 0:
+				target.take_damage(75)
+				time_to_atack = 5
 			direction = Vector2.ZERO
 			velocity.x = speed * direction.x
-		
-		
+			
 	if sign(direction.x) == -1:
 		$AnimationPlayer.play("movingR")
 		if current_state == States.CRAWLING:
@@ -126,7 +129,10 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	if sign(direction.x): $Flip.scale.x = sign(direction.x)
-	
+
+
+var time_to_atack: float = 5
+
 
 func take_damage(damage : float) -> void:
 	current_health_points = max(0, current_health_points - damage)
