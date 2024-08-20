@@ -81,6 +81,7 @@ var inside_bucket: bool = false
 var inside_tree: bool = false
 @export var cut_time: float = 1.0
 @onready var default_cut_time: float = cut_time
+@export var _tree_scene: PackedScene
 var wood_carrying: bool = false
 
 var is_attacking: = false
@@ -188,13 +189,19 @@ func cutting_state(delta: float) -> void:
 	if cut_time < 0:
 		if is_instance_valid(_cut_tree):
 			_cut_tree.finish_cutting()
+			var _tree_pos:Vector2 = self.global_position
+			get_tree().create_timer(Globals.spawn_tree_time * Globals.spawn_tree_multi).timeout.connect(func():
+				var new_tree:Node = _tree_scene.instantiate()
+				new_tree.global_position = _tree_pos + Vector2(randf_range(-50, 50),
+				-200)
+				get_tree().current_scene.add_child(new_tree))
 		cutting_state_exit()
 	
 	friction(_ground_fric, delta)
 
 
 func cutting_state_exit() -> void:
-	cut_time = default_cut_time
+	cut_time = default_cut_time * Globals.cut_speed_multi
 	if is_on_floor():
 		_actual_state = STATE_STAND
 	else:
@@ -255,6 +262,7 @@ func move_state(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ui_accept"):
 			horizontal_attack()
+
 
 func air_state(delta: float) -> void:
 	flip_nodes()
@@ -396,14 +404,13 @@ func flip_nodes() -> void:
 func horizontal_attack() -> void:
 	#print(inside_tree)
 	if enemy_area.has_overlapping_bodies() and not is_attacking:
-		print("atacque obrigatorio")
 		atack()
 		return
 	if not is_attacking and not carrying and not wood_carrying and \
 	not inside_tree and not catch_area.currently_used() and \
 	not $Flip/MiningPos.can_mining() and not inside_bucket:
-		print("atacque libre")
 		atack()
+
 
 func atack() -> void:
 	is_attacking = true

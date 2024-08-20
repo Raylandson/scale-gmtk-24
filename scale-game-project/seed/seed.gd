@@ -47,6 +47,12 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 	if body is Actor:
 		body.inside_upgrade_area = true
 	
+	if body is Bucket:
+		Globals.dict_vars["water"] += body.current_water_quantity
+		Globals.update_vars()
+		body.current_water_quantity = 0
+	
+	
 	if body is CollectableItem:
 		body.collectable = false
 		if Globals.dict_vars.has(body.type):
@@ -68,7 +74,7 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 func _on_collect_area_body_exited(body: Node2D) -> void:
 	if body is Actor:
 		body.inside_upgrade_area = false
-		body.queue_free()
+		#body.queue_free()
 
 
 func update_level_up():

@@ -10,8 +10,8 @@ height = 60.0
 
 [node name="Well" type="Area2D"]
 z_index = -10
+monitorable = false
 script = ExtResource("1_s6ewa")
-water_quantity = 12
 
 [node name="Icon" type="Sprite2D" parent="."]
 position = Vector2(-1, -20)
@@ -30,5 +30,9 @@ Bucket"
 position = Vector2(-12, 34)
 shape = SubResource("CapsuleShape2D_76vlh")
 
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

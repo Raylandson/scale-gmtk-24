@@ -5,7 +5,7 @@ var player: Actor
 var player_inside: bool = false
 @export var log_quantity: int = 2
 @export var log_scene: PackedScene
-
+#@export var _tree_scene: PackedScene
 
 func _ready() -> void:
 	randomize()
@@ -30,6 +30,7 @@ func _physics_process(delta: float) -> void:
 
 func finish_cutting() -> void:
 	$AnimationPlayer.play("fall")
+	#to ficando maluco ja, crazy
 
 
 func _on_cut_area_body_entered(body: Node2D) -> void:
@@ -50,4 +51,3 @@ func create_wood_material():
 		var new_log: RigidBody2D = log_scene.instantiate()
 		new_log.global_position = self.global_position
 		get_tree().current_scene.add_child(new_log)
-		print('log spawned')

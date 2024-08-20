@@ -1,9 +1,10 @@
 extends Area2D
 
-@export var water_quantity: int = 3
+@onready var water_quantity = Globals.well_max_water
 
 var _player: Actor
 var _player_inside: bool = false
+@export var time_to_fill_water: float = 5.0
 
 
 func _process(delta: float) -> void:
@@ -16,10 +17,10 @@ func _process(delta: float) -> void:
 			if _player._bucket.full():
 				_player_inside = false
 				_player.inside_well = false
-			water_quantity = _player._bucket.catch_water(water_quantity)
-			_player.change_velocity_multiplier()
-			#printt(water_quantity)
-
+			else:
+				%Timer.start(Globals.well_fill_multiplier * time_to_fill_water)
+				water_quantity = _player._bucket.catch_water(water_quantity)
+			#_player.change_velocity_multiplier()
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -40,3 +41,17 @@ func _on_body_exited(body: Node2D) -> void:
 	if body is Actor:
 		_player_inside = false
 		_player.inside_well = false
+
+
+func full() -> bool:
+	if water_quantity == Globals.well_max_water:
+		return true
+	return false
+
+
+func _on_timer_timeout() -> void:
+	if full():
+		%Timer.stop()
+		return
+	water_quantity += 1
+	

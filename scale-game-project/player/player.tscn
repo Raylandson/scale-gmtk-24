@@ -1,6 +1,7 @@
 [gd_scene load_steps=36 format=3 uid="uid://bvbw83pfh83ca"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ct6yo"]
+[ext_resource type="PackedScene" uid="uid://bkda8mouc26ie" path="res://tools/tree.tscn" id="2_3lohx"]
 [ext_resource type="Texture2D" uid="uid://1emngc8345pc" path="res://assets/sprites/farmer_player.png" id="2_201af"]
 [ext_resource type="Script" path="res://player/mining_tool.gd" id="3_6yb8d"]
 [ext_resource type="Script" path="res://player/catch_area.gd" id="3_xw35a"]
@@ -234,6 +235,7 @@ min_jump_size = 20.0
 fall_time = 0.45
 buffering_time = 0.147
 coyote_time = 0.154
+_tree_scene = ExtResource("2_3lohx")
 
 [node name="Flip" type="Node2D" parent="."]
 
