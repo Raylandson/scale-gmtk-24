@@ -2,7 +2,7 @@ extends CanvasLayer
 
 var player_offensive_index = 0
 var current_upgrade: String
-var indexes_list:Array = [0, 0]
+var indexes_list:Array = [0, 0, 0]
 
 var upgrades = [
 	[
@@ -73,8 +73,101 @@ var upgrades = [
 			'wood': 0,
 			'ore': 0
 		}
+	],
+	# well upgrades
+	[
+		{
+			'nome': 'well fill velocity +',
+			'upgrade': 'upgrade_well_fill_velocity',
+			'water': 0,
+			'wood': 4,
+			'ore': 5
+		},
+		{
+			'nome': 'well max water +',
+			'upgrade': 'upgrade_well_max_water',
+			'water': 0,
+			'wood': 3,
+			'ore': 4
+		},
+		{
+			'nome': 'well fill velocity (lvl 2) ++',
+			'upgrade': 'upgrade_well_fill_velocity',
+			'water': 0,
+			'wood': 5,
+			'ore': 5
+		},
+		{
+			'nome': 'bucket max water +',
+			'upgrade': 'upgrade_bucket_max_water',
+			'water': 0,
+			'wood': 2,
+			'ore': 6
+		},
+		{
+			'nome': 'Max level Reached',
+			'upgrade': 'bosonaro',
+			'water': 0,
+			'wood': 0,
+			'ore': 0
+		},
+	],
+	[
+		{
+			'nome': 'Cut speed +',
+			'upgrade': 'upgrade_cut_speed',
+			'water': 0,
+			'wood': 2,
+			'ore': 5
+		},
+		{
+			'nome': 'tree spawn_speed +',
+			'upgrade': 'upgrade_tree_spawn_speed',
+			'water': 2,
+			'wood': 4,
+			'ore': 0
+		},
+		{
+			'nome': 'tree spawn_speed (lvl 2) ++',
+			'upgrade': 'upgrade_tree_spawn_speed',
+			'water': 4,
+			'wood': 3,
+			'ore': 0
+		},
+		{
+			'nome': 'Max level Reached',
+			'upgrade': 'bosonaro',
+			'water': 0,
+			'wood': 0,
+			'ore': 0
+		},
+		
 	]
 ]
+
+
+func upgrade_cut_speed() -> void:
+	Globals.cut_speed_multi -= 0.2
+	
+	print("Cut speed upgraded!")
+
+func upgrade_tree_spawn_speed() -> void:
+	Globals.spawn_tree_multi -= 0.2
+	print("Tree spawn speed upgraded!")
+
+
+
+func upgrade_well_fill_velocity() -> void:
+	Globals.well_fill_multiplier -= 0.15
+	print("Well fill velocity upgraded!")
+
+func upgrade_well_max_water() -> void:
+	Globals.well_max_water += 2
+	print("Well max water capacity increased!")
+
+func upgrade_bucket_max_water() -> void:
+	Globals.bucket_max_water += 2
+	print("Bucket max water capacity increased!")
 
 
 func upgrade_sword_damage() -> void:

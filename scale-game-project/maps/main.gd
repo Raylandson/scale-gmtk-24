@@ -6,8 +6,6 @@ extends Node2D
 @export var min_blocks_between_resources: int = 2
 @export var max_blocks_between_resources: int = 3
 @export_range(0.0, 1.0) var chance_to_spawn_ore: float = 0.5
-@export_range(0.0, 1.0) var chance_to_spawn_tree: float = 0.25
-@export_range(0.0, 1.0) var chance_to_spawn_well: float = 0.25
 @export var tree_scene: PackedScene
 @export var well_scene: PackedScene
 
@@ -31,14 +29,12 @@ func _ready() -> void:
 				if tile_map.get_cell_source_id(cell + Vector2i(1, -1)) != -1 or\
 				tile_map.get_cell_source_id(cell + Vector2i(-1, -1)) != -1 :
 					next_block_replace = true
-					print('repalce')
+					#print('repalce')
 					continue
 				next_block_replace = false
 				tile_map.set_cell(cell, 0, Vector2i.ZERO)
-			elif resource_choice < chance_to_spawn_ore + chance_to_spawn_tree:
-				spawn_scene(tree_scene, current_pos) 
 			else:
-				spawn_scene(well_scene, current_pos) 
+				spawn_scene(tree_scene, current_pos) 
 			
 			
 			next_spawn_distance = randi_range(min_blocks_between_resources, max_blocks_between_resources)

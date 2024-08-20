@@ -87,7 +87,7 @@ func _physics_process(delta):
 			if is_instance_valid(tile_map):
 				var cell_id: = tile_map.get_cell_source_id(
 					tile_map.local_to_map(%Marker2D.global_position))
-				print(cell_id)
+				#print(cell_id)
 				if cell_id != -1 and not jumped:
 					jumped = true
 					self.velocity.y = -jump_speed
