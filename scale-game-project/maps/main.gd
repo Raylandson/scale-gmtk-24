@@ -11,9 +11,11 @@ extends Node2D
 @export var tree_scene: PackedScene
 @export var well_scene: PackedScene
 
+
 func _ready() -> void:
 	var next_spawn_distance := randi_range(min_blocks_between_resources, max_blocks_between_resources)
 	var current_distance := 0
+	var next_block_replace: bool = false
 	
 	for cell in tile_map.get_used_cells_by_id(3):
 		var current_pos := tile_map.map_to_local(cell)
@@ -21,11 +23,17 @@ func _ready() -> void:
 		if current_pos.distance_to(initial_pos.global_position) < min_distance_to_spawn:
 			continue
 		
-		if current_distance >= next_spawn_distance:
+		if current_distance >= next_spawn_distance or next_block_replace:
 			var resource_choice := randf()
 			
-			if resource_choice < chance_to_spawn_ore:
-				tile_map.set_cell(cell, 0, Vector2i.ZERO) 
+			if resource_choice < chance_to_spawn_ore or next_block_replace:
+				if tile_map.get_cell_source_id(cell + Vector2i(1, -1)) != -1 or\
+				tile_map.get_cell_source_id(cell + Vector2i(-1, -1)) != -1 :
+					next_block_replace = true
+					print('repalce')
+					continue
+				next_block_replace = false
+				tile_map.set_cell(cell, 0, Vector2i.ZERO)
 			elif resource_choice < chance_to_spawn_ore + chance_to_spawn_tree:
 				spawn_scene(tree_scene, current_pos) 
 			else:

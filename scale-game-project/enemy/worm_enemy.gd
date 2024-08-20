@@ -3,6 +3,8 @@ extends CharacterBody2D
 enum States{MOVING, ATTACKING, DEATH, IDLE, CRAWLING}
 var current_state = States.CRAWLING
 
+
+
 @export var speed = 8
 @export var gravity = 50
 @export var attack_distance_threshold = 50

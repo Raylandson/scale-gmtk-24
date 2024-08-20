@@ -9,7 +9,13 @@ STATE_CARRYING, STATE_CUTTING}
 const TILE_SIZE = 16
 
 const SWORD_LVL_1 = preload("res://attacks/sword_lvl_1.tscn")
+const SWORD_LVL_2 = preload("res://attacks/sword_lvl_1.tscn")
+const SWORD_BERZEK = preload("res://attacks/sword_lvl_1.tscn")
+var current_sword = SWORD_LVL_1
+
 @export var tile_map: TileMapLayer
+@export var catch_area: CatchArea
+@export var enemy_area: Area2D
 
 @export var ground_max_velocity: float = 7.0 * TILE_SIZE
 @export_range (0.01, 2.0) var ground_turn_time: float = 0.15
@@ -72,11 +78,13 @@ var default_carrying_multiplier: float = 0.5
 var carrying: bool = false
 var inside_well: bool = false
 var inside_bucket: bool = false
+var inside_tree: bool = false
 @export var cut_time: float = 1.0
 @onready var default_cut_time: float = cut_time
 var wood_carrying: bool = false
 
-var is_attacking = false
+var is_attacking: = false
+var first_pick: bool = true #olha oq vc me faz fazer
 
 
 func _process(delta: float) -> void:
@@ -87,6 +95,9 @@ func _process(delta: float) -> void:
 
 func _ready():
 	add_to_group("player")
+	Globals.upgrade_sword_2.connect(update_sword_2)
+	Globals.upgrade_sword_berzek.connect(update_berzek_sonaro)
+
 
 
 func _physics_process(delta):
@@ -95,7 +106,7 @@ func _physics_process(delta):
 	
 	
 	#printt(velocity, _g_multiplier, _ground_accel)s
-	#print(_actual_state)
+	#print(Globals.speed_multi)
 	match _actual_state:
 		STATE_STAND:
 			stand_state(delta)
@@ -127,11 +138,13 @@ func _physics_process(delta):
 func grab(bucket: Bucket) -> void:
 	_bucket = bucket
 	carrying = true
+	first_pick = true
 	if bucket.full():
 		change_velocity_multiplier()
 
 
 func change_velocity_multiplier() -> void:
+	return
 	carrying_velocity_multiplier = default_carrying_multiplier
 
 #top 3 nomes
@@ -141,13 +154,16 @@ func disgrab() -> void:
 
 
 func bucket_follow() -> void:
+	#print(carrying)
 	if is_instance_valid(_bucket) and carrying:
 		_bucket.global_position = %BucketPos.global_position
 	
 	if Input.is_action_just_pressed("ui_accept") and is_instance_valid(_bucket)\
 	and carrying and not inside_well:
-		disgrab()
-		_bucket.dishold()
+		if not first_pick:
+			disgrab()
+			_bucket.dishold(velocity * 100)
+		first_pick = false
 
 
 func carrying_state(delta: float) -> void:
@@ -357,8 +373,8 @@ func movement(accel:float, turn_accel:float, max_velocity:float, delta:float) ->
 			velocity.x += turn_accel * _direction * delta
 		
 		velocity.x = clamp(velocity.x,
-		 -max_velocity * carrying_velocity_multiplier,
-		 max_velocity * carrying_velocity_multiplier)
+		 -max_velocity,
+		 max_velocity)
 
 
 func manage_animations():
@@ -370,13 +386,32 @@ func flip_nodes() -> void:
 		$Flip.scale.x = _direction
 
 
-func horizontal_attack():
-	if is_attacking == false and not carrying:
-		is_attacking = true
-		var sw = SWORD_LVL_1.instantiate()
-		$Flip/AtkPivot.add_child(sw)
-		sw.ended.connect(set_can_attacking)
-		
-func set_can_attacking():
-	
+func horizontal_attack() -> void:
+	print(inside_tree)
+	if enemy_area.has_overlapping_bodies() and not is_attacking:
+		print("atacque obrigatorio")
+		atack()
+		return
+	if not is_attacking and not carrying and not wood_carrying and \
+	not inside_tree and not catch_area.currently_used() and \
+	not $Flip/MiningPos.can_mining() and not inside_bucket:
+		print("atacque libre")
+		atack()
+
+func atack() -> void:
+	is_attacking = true
+	var sw = current_sword.instantiate()
+	$Flip/AtkPivot.add_child(sw)
+	sw.ended.connect(set_can_attacking)
+
+
+func set_can_attacking() -> void:
 	is_attacking = false
+
+
+func update_sword_2() -> void:
+	current_sword = SWORD_LVL_2 
+
+
+func update_berzek_sonaro() -> void:
+	current_sword = SWORD_BERZEK

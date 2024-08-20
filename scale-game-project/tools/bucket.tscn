@@ -1,17 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://84fc07qg4qwn"]
+[gd_scene load_steps=6 format=3 uid="uid://84fc07qg4qwn"]
 
 [ext_resource type="Script" path="res://tools/bucket.gd" id="1_wfayw"]
 [ext_resource type="Texture2D" uid="uid://drhoo8tdfh7nq" path="res://assets/sprites/bucket.png" id="2_47w7v"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0rxgp"]
+friction = 34.7
+bounce = 0.4
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_xkp7u"]
 radius = 16.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_b4pog"]
-radius = 8.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k8hrq"]
+size = Vector2(12, 14)
 
-[node name="Bucket" type="CharacterBody2D"]
+[node name="Bucket" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 16
+mass = 1.46
+physics_material_override = SubResource("PhysicsMaterial_0rxgp")
 script = ExtResource("1_wfayw")
 
 [node name="GrabArea" type="Area2D" parent="."]
@@ -20,7 +26,7 @@ script = ExtResource("1_wfayw")
 shape = SubResource("CircleShape2D_xkp7u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_b4pog")
+shape = SubResource("RectangleShape2D_k8hrq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_47w7v")
