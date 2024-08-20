@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bqdoisca0dx26"]
+[gd_scene load_steps=9 format=3 uid="uid://bqdoisca0dx26"]
 
 [ext_resource type="Script" path="res://enemy/worm_enemy.gd" id="1_83hfe"]
 [ext_resource type="Texture2D" uid="uid://cc1kia8x275i1" path="res://assets/sprites/worm.png" id="2_6hx4w"]
@@ -62,6 +62,8 @@ _data = {
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xaorm"]
 height = 35.778
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ijahi"]
+
 [node name="WormEnemy" type="CharacterBody2D" groups=["enemy"]]
 collision_layer = 4
 collision_mask = 16
@@ -98,3 +100,14 @@ hframes = 6
 position = Vector2(0.614278, -9.427)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_xaorm")
+
+[node name="PlayerAtackArea" type="Area2D" parent="."]
+position = Vector2(0, -9)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAtackArea"]
+unique_name_in_owner = true
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ijahi")
+
+[connection signal="body_entered" from="PlayerAtackArea" to="." method="_on_player_atack_area_body_entered"]

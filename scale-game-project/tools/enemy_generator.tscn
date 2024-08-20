@@ -10,4 +10,9 @@ worm_enemy = ExtResource("2_u0nwk")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 
+[node name="DifficultTimer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="DifficultTimer" to="." method="_on_difficult_timer_timeout"]

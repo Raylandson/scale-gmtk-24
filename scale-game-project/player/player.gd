@@ -3,7 +3,7 @@ extends CharacterBody2D
 class_name Actor
 
 enum {STATE_MOVE, STATE_STAND, STATE_AIR, STATE_CLIMBING, STATE_STUNED,
-STATE_CARRYING, STATE_CUTTING}
+STATE_CARRYING, STATE_CUTTING, STATE_DAMAGE}
 
 
 const TILE_SIZE = 16
@@ -132,9 +132,15 @@ func _physics_process(delta):
 		STATE_CUTTING:
 			cutting_state(delta)
 	
+		STATE_DAMAGE:
+			velocity.x = 300 * damage_dir
+			if is_on_floor():
+				_actual_state = STATE_MOVE
+			
 	velocity.y += gravity * delta * _g_multiplier
 	move_and_slide()
 
+var damage_dir = 1
 
 func grab(bucket: Bucket) -> void:
 	_bucket = bucket
@@ -429,3 +435,13 @@ func update_sword_2() -> void:
 
 func update_berzek_sonaro() -> void:
 	current_sword = SWORD_BERZEK
+
+
+func take_damage(vector: Vector2) -> void:
+	if _actual_state == STATE_DAMAGE:
+		return
+	_actual_state = STATE_DAMAGE
+	damage_dir = sign(vector.x)
+	#print(damage_dir)
+	velocity.y = -500
+	

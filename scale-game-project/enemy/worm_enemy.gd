@@ -28,7 +28,7 @@ func _ready():
 		var direct_to_target = global_position.direction_to(target.global_position)
 		floor_pos = global_position + Vector2(sign(direct_to_target.x)*200, -200)
 	$CollisionShape2D.disabled = true
-	
+	%CollisionShape2D.disabled = true
 
 
 func _physics_process(delta):
@@ -60,6 +60,8 @@ func _physics_process(delta):
 					gravity_scale = 1
 					jump_force = -100
 					$CollisionShape2D.disabled = false
+					#a sublime diferença
+					%CollisionShape2D.disabled = false
 					current_state = States.MOVING
 		
 		
@@ -143,3 +145,8 @@ func death():
 func apply_knockback():
 	self.global_position += -direction + Vector2(10, 10)
 	pass 
+
+
+func _on_player_atack_area_body_entered(body: Node2D) -> void:
+	if body is Actor and is_instance_valid(target):
+		body.take_damage(self.global_position.direction_to(target.global_position))
