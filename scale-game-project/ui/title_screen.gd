@@ -5,7 +5,7 @@ const MAIN = preload("res://maps/main.tscn")
 
 
 func _ready():
-	$VBoxContainer/Button.grab_focus()
+	%Button.grab_focus()
 
 
 func _on_button_pressed():
@@ -14,10 +14,10 @@ func _on_button_pressed():
 
 func _on_button_2_pressed():
 	$AnimationPlayer.play("credits")
-	$Button4.grab_focus()
+	%Button4.grab_focus()
 	
 
 
 func _on_button_4_pressed():
 	$AnimationPlayer.play("credits", -1, -1)
-	$VBoxContainer/Button2.grab_focus()
+	%Button2.grab_focus()

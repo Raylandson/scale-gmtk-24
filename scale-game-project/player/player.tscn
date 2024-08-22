@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://bvbw83pfh83ca"]
+[gd_scene load_steps=44 format=3 uid="uid://bvbw83pfh83ca"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_ct6yo"]
 [ext_resource type="PackedScene" uid="uid://bkda8mouc26ie" path="res://tools/tree.tscn" id="2_3lohx"]
@@ -10,6 +10,8 @@
 [ext_resource type="AudioStream" uid="uid://bemgqv2ochrhm" path="res://assets/sounds/randomQeubra.wav" id="8_7fvid"]
 [ext_resource type="AudioStream" uid="uid://deskfhnlhqks3" path="res://assets/sounds/pickupCoin.wav" id="9_qs1g7"]
 [ext_resource type="AudioStream" uid="uid://6sc1p18g46mb" path="res://assets/sounds/explosion.wav" id="10_o7vn2"]
+[ext_resource type="Texture2D" uid="uid://dhp3pt4m01b2u" path="res://assets/sprites/interact_button.png" id="11_i7oy0"]
+[ext_resource type="FontFile" uid="uid://bi7o50migv241" path="res://assets/resources/Pixellari.ttf" id="12_mbu5l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgwwu"]
 size = Vector2(34, 63)
@@ -229,6 +231,14 @@ states/walk/node = SubResource("AnimationNodeAnimation_0q4oo")
 states/walk/position = Vector2(595, 63)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_s3jb8"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_hf2d4"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_emfj8"), "idle", "tree", SubResource("AnimationNodeStateMachineTransition_jfbtf"), "idle", "hold", SubResource("AnimationNodeStateMachineTransition_8iihr"), "hold", "idle", SubResource("AnimationNodeStateMachineTransition_qnw01"), "tree", "idle", SubResource("AnimationNodeStateMachineTransition_xu8e3"), "jump", "walk", SubResource("AnimationNodeStateMachineTransition_qtivi"), "jump", "idle", SubResource("AnimationNodeStateMachineTransition_pdshf"), "idle", "End", SubResource("AnimationNodeStateMachineTransition_jev3a"), "hold_walk", "idle", SubResource("AnimationNodeStateMachineTransition_ms2pq"), "idle", "hold_walk", SubResource("AnimationNodeStateMachineTransition_nftfh")]
 
+[sub_resource type="LabelSettings" id="LabelSettings_7txra"]
+line_spacing = -4.0
+font = ExtResource("12_mbu5l")
+outline_size = 3
+outline_color = Color(0.0509804, 0.0588235, 0.054902, 1)
+shadow_size = 3
+shadow_color = Color(0.0509804, 0.0588235, 0.054902, 1)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("catch_area", "enemy_area") groups=["CameraChanger"]]
 collision_mask = 17
 script = ExtResource("1_ct6yo")
@@ -311,6 +321,24 @@ volume_db = -10.735
 unique_name_in_owner = true
 stream = ExtResource("10_o7vn2")
 volume_db = -25.077
+
+[node name="MiningLabel" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -29)
+
+[node name="Sprite2D" type="Sprite2D" parent="MiningLabel"]
+texture = ExtResource("11_i7oy0")
+
+[node name="Label" type="Label" parent="MiningLabel"]
+offset_left = 1.0
+offset_top = 5.0
+offset_right = 57.0
+offset_bottom = 21.0
+text = "Mine"
+label_settings = SubResource("LabelSettings_7txra")
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="CatchArea" to="CatchArea" method="_on_body_entered"]
 [connection signal="body_exited" from="CatchArea" to="CatchArea" method="_on_body_exited"]

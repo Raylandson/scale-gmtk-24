@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bkda8mouc26ie"]
+[gd_scene load_steps=13 format=3 uid="uid://bkda8mouc26ie"]
 
 [ext_resource type="Script" path="res://tools/tree.gd" id="1_haqbx"]
 [ext_resource type="PackedScene" uid="uid://ceha2iavrxbq2" path="res://tools/log.tscn" id="2_l782i"]
@@ -6,8 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://d10wsp6xq0t6e" path="res://assets/sprites/tree1.png" id="4_l8k3u"]
 [ext_resource type="PackedScene" uid="uid://c0vhe50r5br4k" path="res://ui/interact_button_ui.tscn" id="4_la5lb"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vrsde"]
+bounce = 0.35
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0x2j"]
-size = Vector2(15, 78)
+size = Vector2(14, 80)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x0rn1"]
 radius = 24.0208
@@ -121,7 +124,7 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = true
+tracks/1/enabled = false
 tracks/1/path = NodePath("Sprite2D:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
@@ -133,7 +136,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("InteractButtonUi/CollisionShape2D3:disabled")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -145,7 +148,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("CutArea/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -157,7 +160,7 @@ tracks/3/keys = {
 }
 tracks/4/type = "method"
 tracks/4/imported = false
-tracks/4/enabled = true
+tracks/4/enabled = false
 tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
@@ -192,15 +195,18 @@ _data = {
 "fall": SubResource("Animation_xa5fn")
 }
 
-[node name="Tree" type="CharacterBody2D"]
+[node name="Tree" type="RigidBody2D"]
 z_index = -5
 collision_layer = 8
 collision_mask = 16
+mass = 0.204
+physics_material_override = SubResource("PhysicsMaterial_vrsde")
+lock_rotation = true
 script = ExtResource("1_haqbx")
 log_scene = ExtResource("2_l782i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, -39)
+position = Vector2(-2, -40)
 shape = SubResource("RectangleShape2D_g0x2j")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

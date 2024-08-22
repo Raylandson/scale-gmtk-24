@@ -4,8 +4,11 @@ class_name Seed
 @export var anim_time: float = 0.4
 @onready var seed = $Seed
 var size_level = 1
-@onready var xp_to_size_level = 45 * size_level
-var current_xp = 0
+@onready var xp_to_size_level = 10 * size_level
+var current_xp: int = 0:
+	set(xp):
+		current_xp = xp
+		update_level_up()
 
 @export var recover_time: float = 5
 @onready var default_recover_time: float = recover_time
@@ -28,12 +31,6 @@ func _process(delta: float) -> void:
 	if recover_time < 0:
 		current_life += 1
 		recover_time = default_recover_time * recover_multiplier
-	current_xp += delta
-	
-	#print(current_xp)
-	
-	if current_xp >= xp_to_size_level:
-		update_level_up()
 
 
 func take_damage(num: float) -> void:
@@ -50,8 +47,10 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 	
 	if body is Bucket:
 		Globals.dict_vars["water"] += body.current_water_quantity
+		current_xp += 5 * body.current_water_quantity
 		Globals.update_vars()
 		body.current_water_quantity = 0
+		
 	
 	
 	if body is CollectableItem:
@@ -59,6 +58,7 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 		if Globals.dict_vars.has(body.type):
 			Globals.dict_vars[body.type] += 1
 			Globals.update_vars()
+			current_xp += 5
 		
 		
 		body.set_freeze(true)
@@ -79,11 +79,15 @@ func _on_collect_area_body_exited(body: Node2D) -> void:
 		#body.queue_free()
 
 
-func update_level_up():
+func update_level_up() -> void:
+	if current_xp < xp_to_size_level:
+		return
+	$Leaf2/CollisionShape2D.disabled = false
+	$Leaf/CollisionShape2D.disabled = false
 	current_xp = 0
 	$Seed.frame = min(size_level, 8)
 	Globals.emit_signal("call_shake", 0.2, 12, 6)
-	
+	print($Seed.frame)
 	match $Seed.frame:
 		4:
 			$Leaf2/CollisionShape2D.disabled = false

@@ -206,7 +206,7 @@ func cutting_state(delta: float) -> void:
 			get_tree().create_timer(Globals.spawn_tree_time * Globals.spawn_tree_multi).timeout.connect(func():
 				var new_tree:Node = _tree_scene.instantiate()
 				new_tree.global_position = _tree_pos + Vector2(randf_range(-50, 50),
-				-200)
+				-400)
 				get_tree().current_scene.add_child(new_tree))
 		cutting_state_exit()
 	

@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://ourn2qxo6j1a"]
+
+[ext_resource type="Texture2D" uid="uid://dxpchd2hr8g6o" path="res://assets/sprites/arrow2.png" id="1_mkn8c"]
+[ext_resource type="Texture2D" uid="uid://d1dud73c1sixs" path="res://assets/sprites/arrow1.png" id="2_db1c1"]
+[ext_resource type="Texture2D" uid="uid://b6tmb1vj7hwsi" path="res://assets/sprites/z.png" id="3_tsw5i"]
+[ext_resource type="Texture2D" uid="uid://dltfjfsrm1nq8" path="res://assets/sprites/up.png" id="4_i182j"]
+[ext_resource type="Texture2D" uid="uid://00584ti0iqqc" path="res://assets/sprites/x.png" id="5_vsj77"]
+
+[node name="MobileButtons" type="CanvasLayer"]
+process_mode = 3
+layer = 99
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_top = -48.1
+offset_right = 40.0
+offset_bottom = -8.1
+
+[node name="Left" type="TouchScreenButton" parent="Control/HBoxContainer"]
+position = Vector2(33, -33)
+scale = Vector2(1.22, 1.22)
+texture_normal = ExtResource("1_mkn8c")
+action = "ui_left"
+
+[node name="right" type="TouchScreenButton" parent="Control/HBoxContainer"]
+position = Vector2(121, -33)
+scale = Vector2(1.22, 1.22)
+texture_normal = ExtResource("2_db1c1")
+action = "ui_right"
+
+[node name="Control2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control2"]
+layout_mode = 0
+offset_left = -212.0
+offset_top = -48.0
+offset_right = -172.0
+offset_bottom = -7.99999
+
+[node name="Accept" type="TouchScreenButton" parent="Control2/HBoxContainer"]
+position = Vector2(59, -33)
+scale = Vector2(1.22, 1.22)
+texture_normal = ExtResource("3_tsw5i")
+action = "ui_accept"
+
+[node name="Jump" type="TouchScreenButton" parent="Control2/HBoxContainer"]
+position = Vector2(121, -33)
+scale = Vector2(1.22, 1.22)
+texture_normal = ExtResource("4_i182j")
+action = "jump"
+
+[node name="Upgrade" type="TouchScreenButton" parent="Control2/HBoxContainer"]
+position = Vector2(122, -91)
+scale = Vector2(1.22, 1.22)
+texture_normal = ExtResource("5_vsj77")
+action = "x"

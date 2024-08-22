@@ -32,7 +32,7 @@ var well_max_water: int = 3
 var well_fill_multiplier: float = 1.0
 var bucket_max_water: int = 2
 
-var spawn_tree_time: float = 50.0
+var spawn_tree_time: float = 80.0
 var spawn_tree_multi: float = 1.0
 var cut_speed_multi:float = 1.0
 
