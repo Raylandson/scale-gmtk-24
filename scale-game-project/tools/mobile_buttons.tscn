@@ -17,21 +17,22 @@ anchor_top = 1.0
 anchor_bottom = 1.0
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+[node name="ColorRect" type="ColorRect" parent="Control"]
+visible = false
 layout_mode = 0
-offset_top = -48.1
-offset_right = 40.0
-offset_bottom = -8.1
+offset_top = -114.0
+offset_right = 576.0
+color = Color(0, 0, 0, 0.231373)
 
-[node name="Left" type="TouchScreenButton" parent="Control/HBoxContainer"]
-position = Vector2(33, -33)
-scale = Vector2(1.22, 1.22)
+[node name="Left" type="TouchScreenButton" parent="Control"]
+modulate = Color(1, 1, 1, 0.760784)
+position = Vector2(44, -59)
 texture_normal = ExtResource("1_mkn8c")
 action = "ui_left"
 
-[node name="right" type="TouchScreenButton" parent="Control/HBoxContainer"]
-position = Vector2(121, -33)
-scale = Vector2(1.22, 1.22)
+[node name="right" type="TouchScreenButton" parent="Control"]
+modulate = Color(1, 1, 1, 0.760784)
+position = Vector2(110, -59)
 texture_normal = ExtResource("2_db1c1")
 action = "ui_right"
 
@@ -45,27 +46,20 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control2"]
-layout_mode = 0
-offset_left = -212.0
-offset_top = -48.0
-offset_right = -172.0
-offset_bottom = -7.99999
-
-[node name="Accept" type="TouchScreenButton" parent="Control2/HBoxContainer"]
-position = Vector2(59, -33)
-scale = Vector2(1.22, 1.22)
+[node name="Accept" type="TouchScreenButton" parent="Control2"]
+modulate = Color(1, 1, 1, 0.760784)
+position = Vector2(-80, -60)
 texture_normal = ExtResource("3_tsw5i")
 action = "ui_accept"
 
-[node name="Jump" type="TouchScreenButton" parent="Control2/HBoxContainer"]
-position = Vector2(121, -33)
-scale = Vector2(1.22, 1.22)
+[node name="Jump" type="TouchScreenButton" parent="Control2"]
+modulate = Color(1, 1, 1, 0.760784)
+position = Vector2(-80, -107)
 texture_normal = ExtResource("4_i182j")
 action = "jump"
 
-[node name="Upgrade" type="TouchScreenButton" parent="Control2/HBoxContainer"]
-position = Vector2(122, -91)
-scale = Vector2(1.22, 1.22)
+[node name="Upgrade" type="TouchScreenButton" parent="Control2"]
+modulate = Color(1, 1, 1, 0.760784)
+position = Vector2(-134, -60)
 texture_normal = ExtResource("5_vsj77")
 action = "x"

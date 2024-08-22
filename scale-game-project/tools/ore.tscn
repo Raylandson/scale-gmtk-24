@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://vquoxdnpnw7j" path="res://assets/sprites/ore_icon.png" id="2_1u5pq"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1v1i8"]
-bounce = 0.4
+bounce = 0.04
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_17e3n"]
 size = Vector2(14, 12)
@@ -13,9 +13,9 @@ size = Vector2(14, 12)
 radius = 6.0
 
 [node name="Ore" type="RigidBody2D" node_paths=PackedStringArray("collision") groups=["CatchItem"]]
-collision_layer = 8
-collision_mask = 24
-mass = 0.81
+collision_layer = 32
+collision_mask = 48
+mass = 0.931
 physics_material_override = SubResource("PhysicsMaterial_1v1i8")
 script = ExtResource("1_226qe")
 type = "ore"

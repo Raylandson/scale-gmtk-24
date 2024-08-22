@@ -5,7 +5,7 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ivv3t"]
 friction = 8.5
-bounce = 0.4
+bounce = 0.12
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_na70n"]
 
@@ -13,8 +13,8 @@ bounce = 0.4
 size = Vector2(12, 21)
 
 [node name="Log" type="RigidBody2D" node_paths=PackedStringArray("collision") groups=["CatchItem"]]
-collision_layer = 8
-collision_mask = 24
+collision_layer = 32
+collision_mask = 48
 mass = 0.805
 physics_material_override = SubResource("PhysicsMaterial_ivv3t")
 center_of_mass_mode = 1

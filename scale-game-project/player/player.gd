@@ -450,7 +450,7 @@ func take_damage(vector: Vector2) -> void:
 	if _actual_state == STATE_DAMAGE:
 		return
 	_actual_state = STATE_DAMAGE
-	damage_dir = sign(vector.x)
+	damage_dir = -sign(vector.x)
 	#print(damage_dir)
-	velocity.y = -500
+	velocity.y = -200
 	

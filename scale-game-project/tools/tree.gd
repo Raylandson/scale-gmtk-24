@@ -43,8 +43,8 @@ func finish_cutting() -> void:
 	#apply_central_force(Vector2(-20000, -60000))
 	var sign := 1 if randi() % 2 == 0 else -1
 	
-	apply_force(Vector2(2000 * sign * randf_range(0.6, 1.0), 
-	-5000 * randf_range(0.6, 1.0)), Vector2(50 * -sign, 0))
+	apply_force(Vector2(500 * sign * randf_range(0.6, 1.0), 
+	-4000 * randf_range(0.6, 1.0)), Vector2(-50 * -sign, 0))
 	get_tree().create_timer(0.5).timeout.connect(func():
 		animation = true
 		)

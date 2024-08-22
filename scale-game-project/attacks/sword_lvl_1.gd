@@ -5,4 +5,4 @@ signal ended
 func _on_body_entered(body):
 	if body.is_in_group("enemy"):
 		body.take_damage(attack_damage * Globals.damage_multi)
-		Globals.emit_signal("call_shake", 0.2, 12, 6)
+		Globals.emit_signal("call_shake", 0.2, 8, 4)

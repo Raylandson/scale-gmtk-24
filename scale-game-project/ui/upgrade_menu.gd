@@ -4,7 +4,7 @@ var player_offensive_index = 0
 var current_upgrade: String
 var indexes_list:Array = [0, 0, 0, 0]
 var _timer = 0
-var time_to_press = 0.3
+var time_to_press = 0.2
 var upgrades = [
 	[
 		# player ofensivo
@@ -19,25 +19,25 @@ var upgrades = [
 			'nome': 'Iron LongSword',
 			'upgrade': 'upgrade_stronger_sword',
 			'water': 2,
-			'wood': 8,
-			'ore': 10
+			'wood': 6,
+			'ore': 8
 		},
 		{
 			'nome': 'Sword Upgrade 2 (Damage+)',
 			'upgrade': 'upgrade_sword_damage',
 			'water': 5,
-			'wood': 10,
-			'ore': 18
+			'wood': 8,
+			'ore': 12
 		},
 		{
 			'nome': 'Black Night Sword (Max Level)',
 			'upgrade': 'upgrade_berzerk_sword',
-			'water': 10,
-			'wood': 5,
-			'ore': 30
+			'water': 5,
+			'wood': 10,
+			'ore': 15
 		},
 		{
-			'nome': 'Max level Reached',
+			'nome': 'Max level',
 			'upgrade': 'bosonaro',
 			'water': 0,
 			'wood': 0,
@@ -56,26 +56,26 @@ var upgrades = [
 		{
 			'nome': 'Attaking Spikes (Periodical Damage)',
 			'upgrade': 'upgrade_thornmail',
-			'water': 10,
-			'wood': 5,
-			'ore': 5
+			'water': 4,
+			'wood': 3,
+			'ore': 3
 		},
 		{
 			'nome': 'Plant Regeneration',
 			'upgrade': 'upgrade_plant_heal_faster',
-			'water': 2,
+			'water': 5,
 			'wood': 3,
-			'ore': 0
+			'ore': 2
 		},
 		{
 			'nome': 'Slow nearby Enemies',
 			'upgrade': 'upgrade_slow_area',
-			'water': 2,
-			'wood': 3,
+			'water': 12,
+			'wood': 8,
 			'ore': 0
 		},
 		{
-			'nome': 'Max level Reached',
+			'nome': 'Max level',
 			'upgrade': 'bosonaro',
 			'water': 0,
 			'wood': 0,
@@ -87,12 +87,12 @@ var upgrades = [
 		{
 			'nome': 'Well Refill (+)',
 			'upgrade': 'upgrade_well_fill_velocity',
-			'water': 8,
+			'water': 5,
 			'wood': 0,
 			'ore': 5
 		},
 		{
-			'nome': 'well max water +',
+			'nome': 'Well max water +',
 			'upgrade': 'upgrade_well_max_water',
 			'water': 12,
 			'wood': 4,
@@ -101,19 +101,19 @@ var upgrades = [
 		{
 			'nome': 'Well Refill (++)',
 			'upgrade': 'upgrade_well_fill_velocity',
-			'water': 18,
+			'water': 9,
 			'wood': 6,
-			'ore': 12
+			'ore': 8
 		},
 		{
 			'nome': 'bucket max water +',
 			'upgrade': 'upgrade_bucket_max_water',
-			'water': 22,
+			'water': 12,
 			'wood': 2,
 			'ore': 2
 		},
 		{
-			'nome': 'Max level Reached',
+			'nome': 'Max level',
 			'upgrade': 'bosonaro',
 			'water': 0,
 			'wood': 0,
@@ -143,7 +143,7 @@ var upgrades = [
 			'ore': 12
 		},
 		{
-			'nome': 'Max level Reached',
+			'nome': 'Max level',
 			'upgrade': 'bosonaro',
 			'water': 0,
 			'wood': 0,

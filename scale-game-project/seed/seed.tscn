@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bi8hos746qhnk"]
+[gd_scene load_steps=7 format=3 uid="uid://bi8hos746qhnk"]
 
 [ext_resource type="Texture2D" uid="uid://b7505ocypkei0" path="res://assets/sprites/seed.png" id="1_8rdpw"]
 [ext_resource type="Script" path="res://seed/seed.gd" id="1_sieue"]
+[ext_resource type="AudioStream" uid="uid://clwmvy4usbf58" path="res://assets/sounds/onmaterialpicked.wav" id="3_thkdb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sw378"]
 radius = 69.0072
@@ -14,13 +15,13 @@ size = Vector2(61.5, 20)
 
 [node name="Seed" type="StaticBody2D"]
 collision_layer = 2
-collision_mask = 18
+collision_mask = 2
 script = ExtResource("1_sieue")
 
 [node name="CollectArea" type="Area2D" parent="."]
 position = Vector2(0, -1)
-collision_layer = 11
-collision_mask = 11
+collision_layer = 43
+collision_mask = 43
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectArea"]
 shape = SubResource("CircleShape2D_sw378")
@@ -35,9 +36,7 @@ position = Vector2(1, 0)
 shape = SubResource("RectangleShape2D_taeee")
 
 [node name="Leaf" type="StaticBody2D" parent="."]
-position = Vector2(52, -27)
-collision_layer = 17
-collision_mask = 17
+position = Vector2(52, -25)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf"]
 position = Vector2(-21.75, 1)
@@ -46,7 +45,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf2" type="StaticBody2D" parent="."]
-position = Vector2(-18, -51)
+position = Vector2(-18, -49)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf2"]
 position = Vector2(-17, 1)
@@ -55,7 +54,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf3" type="StaticBody2D" parent="."]
-position = Vector2(52, -68)
+position = Vector2(52, -66)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf3"]
 position = Vector2(-19.75, 0)
@@ -64,7 +63,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf4" type="StaticBody2D" parent="."]
-position = Vector2(-16, -93)
+position = Vector2(-16, -91)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf4"]
 position = Vector2(-20, 4)
@@ -73,16 +72,16 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf5" type="StaticBody2D" parent="."]
-position = Vector2(60, -117)
+position = Vector2(60, -115)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf5"]
-position = Vector2(-19, 5)
+position = Vector2(-28, 10)
 shape = SubResource("RectangleShape2D_gc5pb")
 disabled = true
 one_way_collision = true
 
 [node name="Leaf6" type="StaticBody2D" parent="."]
-position = Vector2(-17, -126)
+position = Vector2(-17, -124)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf6"]
 position = Vector2(-19.75, 0)
@@ -91,7 +90,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf7" type="StaticBody2D" parent="."]
-position = Vector2(60, -150)
+position = Vector2(60, -148)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf7"]
 position = Vector2(-19.75, 0)
@@ -100,7 +99,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf8" type="StaticBody2D" parent="."]
-position = Vector2(-18, -170)
+position = Vector2(-18, -168)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf8"]
 position = Vector2(-19.75, 0)
@@ -109,7 +108,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf9" type="StaticBody2D" parent="."]
-position = Vector2(56, -196)
+position = Vector2(56, -194)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf9"]
 position = Vector2(-19.75, 0)
@@ -118,7 +117,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf10" type="StaticBody2D" parent="."]
-position = Vector2(-17, -214)
+position = Vector2(-17, -212)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf10"]
 position = Vector2(-19.75, 0)
@@ -127,7 +126,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf11" type="StaticBody2D" parent="."]
-position = Vector2(59, -239)
+position = Vector2(59, -237)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf11"]
 position = Vector2(-19.75, 0)
@@ -136,7 +135,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf12" type="StaticBody2D" parent="."]
-position = Vector2(-18, -257)
+position = Vector2(-18, -255)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf12"]
 position = Vector2(-19.75, 0)
@@ -145,7 +144,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf13" type="StaticBody2D" parent="."]
-position = Vector2(54, -279)
+position = Vector2(54, -277)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf13"]
 position = Vector2(-19.75, 0)
@@ -154,7 +153,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf14" type="StaticBody2D" parent="."]
-position = Vector2(-15, -299)
+position = Vector2(-15, -297)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf14"]
 position = Vector2(-19.75, 0)
@@ -163,7 +162,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf15" type="StaticBody2D" parent="."]
-position = Vector2(58, -324)
+position = Vector2(58, -322)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf15"]
 position = Vector2(-19.75, 0)
@@ -172,7 +171,7 @@ disabled = true
 one_way_collision = true
 
 [node name="Leaf16" type="StaticBody2D" parent="."]
-position = Vector2(-16, -343)
+position = Vector2(-16, -341)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Leaf16"]
 position = Vector2(-19.75, 0)
@@ -183,11 +182,26 @@ one_way_collision = true
 [node name="Label" type="Label" parent="."]
 unique_name_in_owner = true
 z_index = 30
-offset_left = -46.0
-offset_top = 18.0
-offset_right = 92.0
-offset_bottom = 34.0
-text = "[X] Upgrade"
+offset_left = -79.0
+offset_top = 37.0
+offset_right = 59.0
+offset_bottom = 91.0
+text = "[ X ]
+Upgrade
+Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="Label"]
+show_behind_parent = true
+offset_left = 31.0
+offset_top = -7.0
+offset_right = 118.0
+offset_bottom = 60.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_thkdb")
+volume_db = -15.0
 
 [connection signal="body_entered" from="CollectArea" to="." method="_on_collect_area_body_entered"]
 [connection signal="body_exited" from="CollectArea" to="." method="_on_collect_area_body_exited"]

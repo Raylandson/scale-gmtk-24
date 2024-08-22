@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c0vhe50r5br4k" path="res://ui/interact_button_ui.tscn" id="4_la5lb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vrsde"]
-bounce = 0.35
+bounce = 0.1
+absorbent = true
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0x2j"]
 size = Vector2(14, 80)

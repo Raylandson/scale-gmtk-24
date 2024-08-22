@@ -4,7 +4,7 @@ class_name Seed
 @export var anim_time: float = 0.4
 @onready var seed = $Seed
 var size_level = 1
-@onready var xp_to_size_level = 10 * size_level
+@onready var xp_to_size_level = 20 * size_level
 var current_xp: int = 0:
 	set(xp):
 		current_xp = xp
@@ -47,9 +47,15 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 	
 	if body is Bucket:
 		Globals.dict_vars["water"] += body.current_water_quantity
-		current_xp += 5 * body.current_water_quantity
+		current_xp += 2 * body.current_water_quantity
 		Globals.update_vars()
 		body.current_water_quantity = 0
+		$AudioStreamPlayer.pitch_scale = randf_range(0.7, 1.3)
+		$AudioStreamPlayer.play()
+		#var tw = create_tween().set_parallel(true)
+		##tw.tween_property(body, "global_position", self.global_position, anim_time).set_trans(Tween.TRANS_QUINT)
+		#tw.tween_property(body, "scale", Vector2(1,1), anim_time).from(Vector2(1.2, 1.2)).set_trans(Tween.TRANS_BOUNCE)
+		#tw.tween_property(seed, "scale", Vector2(1,1), 0.35).from(Vector2(1.3, 1.3)).set_trans(Tween.TRANS_BOUNCE)
 		
 	
 	
@@ -58,8 +64,10 @@ func _on_collect_area_body_entered(body: Node2D) -> void:
 		if Globals.dict_vars.has(body.type):
 			Globals.dict_vars[body.type] += 1
 			Globals.update_vars()
-			current_xp += 5
+			current_xp += 3
 		
+		$AudioStreamPlayer.pitch_scale = randf_range(0.7, 1.3)
+		$AudioStreamPlayer.play()
 		
 		body.set_freeze(true)
 		body.rotation = randf()
@@ -82,34 +90,34 @@ func _on_collect_area_body_exited(body: Node2D) -> void:
 func update_level_up() -> void:
 	if current_xp < xp_to_size_level:
 		return
-	$Leaf2/CollisionShape2D.disabled = false
-	$Leaf/CollisionShape2D.disabled = false
+
 	current_xp = 0
 	$Seed.frame = min(size_level, 8)
-	Globals.emit_signal("call_shake", 0.2, 12, 6)
+	Globals.emit_signal("call_shake", 0.3, 12, 8)
 	print($Seed.frame)
+	
 	match $Seed.frame:
 		4:
-			$Leaf2/CollisionShape2D.disabled = false
+			$Leaf2/CollisionShape2D.call_deferred('set', "disabled", false)
 		3:
-			$Leaf/CollisionShape2D.disabled = false
+			$Leaf/CollisionShape2D.call_deferred('set', "disabled", false)
 		5: 
-			$Leaf3/CollisionShape2D.disabled = false
-			$Leaf4/CollisionShape2D.disabled = false
+			$Leaf3/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf4/CollisionShape2D.call_deferred('set', "disabled", false)
 		6:
-			$Leaf5/CollisionShape2D.disabled = false
-			$Leaf6/CollisionShape2D.disabled = false
+			$Leaf5/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf6/CollisionShape2D.call_deferred('set', "disabled", false)
 		7:
-			$Leaf7/CollisionShape2D.disabled = false
-			$Leaf8/CollisionShape2D.disabled = false
-			$Leaf9/CollisionShape2D.disabled = false
-			$Leaf10/CollisionShape2D.disabled = false
+			$Leaf7/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf8/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf9/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf10/CollisionShape2D.call_deferred('set', "disabled", false)
 		8:
-			$Leaf11/CollisionShape2D.disabled = false
-			$Leaf12/CollisionShape2D.disabled = false
-			$Leaf13/CollisionShape2D.disabled = false
-			$Leaf14/CollisionShape2D.disabled = false
-			$Leaf15/CollisionShape2D.disabled = false
-			$Leaf16/CollisionShape2D.disabled = false
+			$Leaf11/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf12/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf13/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf14/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf15/CollisionShape2D.call_deferred('set', "disabled", false)
+			$Leaf16/CollisionShape2D.call_deferred('set', "disabled", false)
 	
 	size_level += 1

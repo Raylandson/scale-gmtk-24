@@ -13,6 +13,7 @@ extends Node2D
 @export var max_enemy_wave: int = 2
 @export var time_to_spawn_fly_word: float = 200
 
+
 func _ready() -> void:
 	spawn_timer.start(randf_range(min_time_spawn, max_time_spawn))
 

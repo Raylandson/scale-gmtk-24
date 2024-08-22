@@ -45,7 +45,7 @@ func _physics_process(delta):
 			#print('crawling in my skin')
 			gravity_scale = 0
 			self.modulate.a = 0.5
-			$Seed.scale = Vector2(0.5, 0.5)
+			$Seed.scale = Vector2(0.75, 0.75)
 			if is_instance_valid(target):
 				direction = global_position.direction_to(floor_pos)
 			
@@ -106,7 +106,7 @@ func _physics_process(delta):
 			#ataque
 			time_to_atack -= delta
 			if is_instance_valid(target) and time_to_atack < 0:
-				target.take_damage(75)
+				target.take_damage(45)
 				time_to_atack = 5
 			direction = Vector2.ZERO
 			velocity.x = speed * direction.x
